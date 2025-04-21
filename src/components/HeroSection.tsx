@@ -3,6 +3,13 @@ import { Button } from "@/components/ui/button";
 import { Shield, Code, Lock } from "lucide-react";
 
 export const HeroSection = () => {
+  const scrollToSection = (id: string) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <section id="home" className="relative min-h-screen flex items-center pt-16 overflow-hidden">
       {/* Background Effects */}
@@ -26,8 +33,21 @@ export const HeroSection = () => {
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4">
-              <Button size="lg" className="px-6">Contactez-moi</Button>
-              <Button size="lg" variant="outline" className="px-6">Voir mes projets</Button>
+              <Button 
+                size="lg" 
+                className="px-6"
+                onClick={() => scrollToSection('contact')}
+              >
+                Contactez-moi
+              </Button>
+              <Button 
+                size="lg" 
+                variant="outline" 
+                className="px-6"
+                onClick={() => scrollToSection('projects')}
+              >
+                Voir mes projets
+              </Button>
             </div>
             
             <div className="pt-8 grid grid-cols-3 gap-4">
@@ -80,4 +100,3 @@ export const HeroSection = () => {
     </section>
   );
 };
-
