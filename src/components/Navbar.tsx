@@ -23,7 +23,7 @@ export const Navbar = () => {
           <a href="#contact" className="hover:text-primary transition-colors">Contact</a>
           {/* Lien Linkstack */}
           <a
-            href="https://rudra.linkstack.com"
+            href="https://links.rudra.it/@rudra"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-1 hover:text-primary transition-colors"
@@ -53,7 +53,7 @@ export const Navbar = () => {
             <a href="#contact" onClick={() => setIsMenuOpen(false)} className="py-2 hover:text-primary transition-colors">Contact</a>
             {/* Lien Linkstack mobile */}
             <a
-              href="https://rudra.linkstack.com"
+              href="https://links.rudra.it/@rudra"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-1 py-2 hover:text-primary transition-colors"
