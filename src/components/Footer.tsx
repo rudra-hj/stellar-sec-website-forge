@@ -10,7 +10,7 @@ export const Footer = () => {
         <div className="flex flex-col md:flex-row justify-between items-center mb-8">
           <div className="flex items-center mb-6 md:mb-0">
             <Shield className="h-8 w-8 text-primary mr-2" />
-            <span className="font-bold text-xl">CyberDefender</span>
+            <span className="font-bold text-xl">Rudra</span>
           </div>
           <div className="flex flex-wrap gap-4 md:gap-8 justify-center">
             <a href="#home" className="hover:text-primary transition-colors">Home</a>
@@ -23,7 +23,7 @@ export const Footer = () => {
         
         <div className="border-t border-cybersec-light/10 pt-8 flex flex-col md:flex-row gap-4 justify-between items-center">
           <div className="text-center md:text-left text-cybersec-muted text-sm">
-            &copy; {currentYear} CyberDefender Solutions. All rights reserved.
+            &copy; {currentYear} Rudra Solutions. All rights reserved.
           </div>
           <div className="flex gap-6">
             <a href="#" className="text-cybersec-muted hover:text-white transition-colors">

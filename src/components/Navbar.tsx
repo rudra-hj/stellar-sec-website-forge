@@ -11,7 +11,7 @@ export const Navbar = () => {
       <div className="container mx-auto px-4 py-3 flex items-center justify-between">
         <div className="flex items-center">
           <Shield className="h-8 w-8 text-primary mr-2" />
-          <span className="font-bold text-xl">CyberDefender</span>
+          <span className="font-bold text-xl">Rudra</span>
         </div>
 
         {/* Desktop Navigation */}
