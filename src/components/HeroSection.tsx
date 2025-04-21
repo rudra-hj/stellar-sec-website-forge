@@ -15,18 +15,19 @@ export const HeroSection = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div className="space-y-6">
             <div className="inline-block px-4 py-1.5 bg-primary/10 rounded-full border border-primary/20">
-              <span className="text-sm font-medium text-primary">Cybersecurity Expert & Open Source Enthusiast</span>
+              <span className="text-sm font-medium text-primary">Ingénieur Système spécialisé Linux & Open Source</span>
             </div>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
-              Secure Your Digital <span className="tech-gradient">Future</span> with Expert Protection
+              Bonjour, je suis <span className="tech-gradient">Rudra</span><br />
+              Expert en technologies open source et Linux
             </h1>
             <p className="text-lg text-gray-300 max-w-lg">
-              Master's degree in Cybersecurity with a passion for Linux, open-source technologies, and implementing robust security solutions for modern enterprises.
+              Ingénieur système passionné par l'open source et les solutions robustes, je crée des infrastructures sécurisées et optimisées avec les technologies libres.
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4">
-              <Button size="lg" className="px-6">Get in Touch</Button>
-              <Button size="lg" variant="outline" className="px-6">View Projects</Button>
+              <Button size="lg" className="px-6">Contactez-moi</Button>
+              <Button size="lg" variant="outline" className="px-6">Voir mes projets</Button>
             </div>
             
             <div className="pt-8 grid grid-cols-3 gap-4">
@@ -34,19 +35,19 @@ export const HeroSection = () => {
                 <div className="inline-flex items-center justify-center h-12 w-12 rounded-lg bg-primary/20 mb-3">
                   <Shield className="h-6 w-6 text-primary" />
                 </div>
-                <p className="text-sm">Security First</p>
+                <p className="text-sm">Sécurité & Stabilité</p>
               </div>
               <div className="text-center">
                 <div className="inline-flex items-center justify-center h-12 w-12 rounded-lg bg-primary/20 mb-3">
                   <Code className="h-6 w-6 text-primary" />
                 </div>
-                <p className="text-sm">Open Source</p>
+                <p className="text-sm">Passion Open Source</p>
               </div>
               <div className="text-center">
                 <div className="inline-flex items-center justify-center h-12 w-12 rounded-lg bg-primary/20 mb-3">
                   <Lock className="h-6 w-6 text-primary" />
                 </div>
-                <p className="text-sm">Privacy Focus</p>
+                <p className="text-sm">Confidentialité & Respect</p>
               </div>
             </div>
           </div>
@@ -79,3 +80,4 @@ export const HeroSection = () => {
     </section>
   );
 };
+
