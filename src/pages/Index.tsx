@@ -1,3 +1,4 @@
+
 import { Navbar } from "@/components/Navbar";
 import { HeroSection } from "@/components/HeroSection";
 import { AboutSection } from "@/components/AboutSection";
@@ -13,8 +14,8 @@ const Index = () => {
       <Navbar />
       <HeroSection />
       <AboutSection />
-      <BlogFeedSection feedUrl="https://luminapp.fr/blog/index.xml" maxItems={4} />
       <EntrepreneurialProjectsSection />
+      <BlogFeedSection feedUrl="https://luminapp.fr/blog/index.xml" maxItems={4} />
       <ContactSection />
       <Footer />
     </div>
@@ -22,3 +23,4 @@ const Index = () => {
 };
 
 export default Index;
+
