@@ -13,7 +13,7 @@ const Index = () => {
       <Navbar />
       <HeroSection />
       <AboutSection />
-      <BlogFeedSection feedUrl="https://your-blog-domain/index.xml" maxItems={4} />
+      <BlogFeedSection feedUrl="https://luminapp.fr/blog/index.xml" maxItems={4} />
       <ProjectsSection />
       <ContactSection />
       <Footer />

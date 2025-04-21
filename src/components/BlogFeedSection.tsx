@@ -16,7 +16,7 @@ type BlogFeedSectionProps = {
 };
 
 export const BlogFeedSection = ({
-  feedUrl = "https://your-blog-domain/index.xml", // <-- à personnaliser !
+  feedUrl = "https://luminapp.fr/blog/index.xml",
   maxItems = 4,
 }: BlogFeedSectionProps) => {
   const { data, isLoading, error } = useQuery({
