@@ -9,7 +9,8 @@ type EntrepreneurialProject = {
   description: string;
   image: string;
   tags: string[];
-  link?: string;
+  link?: string; // lien vers le site du projet (externe)
+  articleLink?: string; // lien vers l'article plus détaillé
 };
 
 const projects: EntrepreneurialProject[] = [
@@ -18,25 +19,30 @@ const projects: EntrepreneurialProject[] = [
     description: "Plateforme SaaS conçue pour simplifier la gestion et la valorisation des projets de recherche scientifique. L'application a su séduire plusieurs laboratoires universitaires en réduisant leur charge administrative.",
     image: "https://images.unsplash.com/photo-1507668077129-56e32842fceb?auto=format&fit=crop&q=80&w=1471&ixlib=rb-4.0.3",
     tags: ["SaaS", "Recherche", "Entrepreneuriat", "En cours"],
-    link: "https://luminapp.fr"
+    link: "https://luminapp.fr",
+    articleLink: "https://luminapp.fr/blog/naissance-luminapp"
   },
   {
     title: "Plateforme de mise en relation professeurs-élèves",
     description: "Marketplace éducative permettant aux professeurs particuliers de proposer leurs services et aux élèves de trouver rapidement un soutien adapté à leurs besoins spécifiques.",
     image: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&q=80&w=1470&ixlib=rb-4.0.3",
     tags: ["Éducation", "Marketplace", "Side-project"],
+    // Exemple : pas encore de site, mais un article
+    articleLink: "https://devblog.fr/article/plateforme-prof-eleve"
   },
   {
     title: "Outil d'automatisation de veille technologique",
     description: "Solution permettant aux professionnels de rester informés des dernières tendances technologiques dans leur secteur grâce à l'agrégation intelligente de contenus et l'analyse automatisée.",
     image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=1470&ixlib=rb-4.0.3",
     tags: ["Automatisation", "IA", "Exploration"],
+    // Ni site ni article
   },
   {
     title: "Prochaine aventure: Solutions pour PME",
     description: "Projet en réflexion pour démocratiser l'accès à la cybersécurité pour les PME, avec un outil simple permettant aux entreprises de monitorer et sécuriser leurs systèmes sans expertise technique approfondie.",
     image: "https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&q=80&w=1470&ixlib=rb-4.0.3",
     tags: ["Cybersécurité", "PME", "SaaS", "Idée"],
+    // Aucun lien encore
   },
 ];
 
@@ -76,18 +82,30 @@ export const EntrepreneurialProjectsSection = () => {
                 <CardDescription className="text-gray-300 text-base">{project.description}</CardDescription>
               </CardContent>
               <CardFooter className="flex justify-between">
-                {project.link ? (
-                  <Button variant="ghost" className="text-primary hover:text-white hover:bg-primary" onClick={() => window.open(project.link, '_blank')}>
+                {/* "Voir le projet" = Accès à l'article détaillé */}
+                {project.articleLink ? (
+                  <Button variant="ghost" className="text-primary hover:text-white hover:bg-primary"
+                    onClick={() => window.open(project.articleLink, '_blank')}
+                  >
                     Voir le projet
                   </Button>
                 ) : (
                   <Button variant="ghost" className="text-primary hover:text-white hover:bg-primary" disabled>
-                    En développement
+                    Voir le projet
                   </Button>
                 )}
-                <Button variant="outline" size="sm">
-                  En savoir plus
-                </Button>
+                {/* "En savoir plus" = Accès au site si présent */}
+                {project.link ? (
+                  <Button variant="outline" size="sm"
+                    onClick={() => window.open(project.link, '_blank')}
+                  >
+                    En savoir plus
+                  </Button>
+                ) : (
+                  <Button variant="outline" size="sm" disabled>
+                    En savoir plus
+                  </Button>
+                )}
               </CardFooter>
             </Card>
           ))}
