@@ -1,6 +1,6 @@
 
 import { useState } from "react";
-import { Menu, X, Shield } from "lucide-react";
+import { Menu, X, Shield, Link as LinkIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export const Navbar = () => {
@@ -21,6 +21,16 @@ export const Navbar = () => {
           <a href="#services" className="hover:text-primary transition-colors">Services</a>
           <a href="#projects" className="hover:text-primary transition-colors">Projects</a>
           <a href="#contact" className="hover:text-primary transition-colors">Contact</a>
+          {/* Lien Linkstack */}
+          <a
+            href="https://rudra.linkstack.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-1 hover:text-primary transition-colors"
+            title="Linkstack"
+          >
+            <LinkIcon className="h-4 w-4" /> Liens
+          </a>
           <Button variant="default">Get Started</Button>
         </div>
 
@@ -41,6 +51,17 @@ export const Navbar = () => {
             <a href="#services" onClick={() => setIsMenuOpen(false)} className="py-2 hover:text-primary transition-colors">Services</a>
             <a href="#projects" onClick={() => setIsMenuOpen(false)} className="py-2 hover:text-primary transition-colors">Projects</a>
             <a href="#contact" onClick={() => setIsMenuOpen(false)} className="py-2 hover:text-primary transition-colors">Contact</a>
+            {/* Lien Linkstack mobile */}
+            <a
+              href="https://rudra.linkstack.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-1 py-2 hover:text-primary transition-colors"
+              title="Linkstack"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              <LinkIcon className="h-4 w-4" /> Liens
+            </a>
             <Button variant="default" onClick={() => setIsMenuOpen(false)} className="w-full">Get Started</Button>
           </div>
         </div>
