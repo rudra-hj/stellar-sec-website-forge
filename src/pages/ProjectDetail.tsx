@@ -1,6 +1,6 @@
 
 import React, { useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { Button } from "@/components/ui/button";
@@ -10,6 +10,7 @@ import { ArrowLeft } from "lucide-react";
 const ProjectDetail = () => {
   const { projectId } = useParams();
   const [project, setProject] = useState(projects[0]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (projectId) {
@@ -82,6 +83,14 @@ const ProjectDetail = () => {
                 </Button>
               </div>
             )}
+
+            {/* Nouveau bouton pour revenir à l'accueil */}
+            <div className="mt-12 mb-8 text-center">
+              <Button variant="outline" onClick={() => navigate("/")}>
+                Retour à l’accueil
+              </Button>
+            </div>
+            
           </div>
         </div>
       </div>
@@ -91,3 +100,4 @@ const ProjectDetail = () => {
 };
 
 export default ProjectDetail;
+
