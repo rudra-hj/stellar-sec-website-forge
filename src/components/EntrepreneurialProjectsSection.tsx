@@ -1,85 +1,98 @@
 
 import React from "react";
+import { Badge } from "@/components/ui/badge";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 
-type ProjectBlogPost = {
+type EntrepreneurialProject = {
   title: string;
-  date: string;
-  content: React.ReactNode;
+  description: string;
+  image: string;
+  tags: string[];
+  link?: string;
 };
 
-const projects: ProjectBlogPost[] = [
+const projects: EntrepreneurialProject[] = [
   {
-    title: "LuminApp – Une aventure SaaS au service de la recherche",
-    date: "2021 - Aujourd’hui",
-    content: (
-      <>
-        <p className="mb-4">
-          LuminApp est mon projet phare&nbsp;: une application SaaS pensée pour simplifier la gestion et la valorisation des projets de recherche scientifique. Partie d’une idée simple (réduire la charge administrative des chercheurs), la plateforme a su séduire plusieurs laboratoires universitaires. J’ai tout appris sur le terrain : écoute utilisateur, itérations, prospection, et déploiement… Ce projet m’a confirmé ma passion pour l’entrepreneuriat digital et l’impact dans la recherche.
-        </p>
-        <a
-          href="https://luminapp.fr"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-primary underline font-medium"
-        >
-          Voir le site LuminApp
-        </a>
-      </>
-    ),
+    title: "LuminApp – Une aventure SaaS pour la recherche",
+    description: "Plateforme SaaS conçue pour simplifier la gestion et la valorisation des projets de recherche scientifique. L'application a su séduire plusieurs laboratoires universitaires en réduisant leur charge administrative.",
+    image: "https://images.unsplash.com/photo-1507668077129-56e32842fceb?auto=format&fit=crop&q=80&w=1471&ixlib=rb-4.0.3",
+    tags: ["SaaS", "Recherche", "Entrepreneuriat", "En cours"],
+    link: "https://luminapp.fr"
   },
   {
-    title: "Expérimenter sans relâche : mes premiers side-projects",
-    date: "2018 - 2021",
-    content: (
-      <p>
-        Depuis mes études, j’ai toujours lancé des “petits” projets par curiosité et envie d’apprendre. Cela va d’une plateforme de mise en relation entre professeurs particuliers et élèves, à un outil d’automatisation de veille technologique pour ne jamais rater les tendances du secteur. Même si tous n'ont pas eu une vie commerciale, chaque expérience m’a offert de précieux enseignements sur l’idéation, le développement et le lancement d'un produit.
-      </p>
-    ),
+    title: "Plateforme de mise en relation professeurs-élèves",
+    description: "Marketplace éducative permettant aux professeurs particuliers de proposer leurs services et aux élèves de trouver rapidement un soutien adapté à leurs besoins spécifiques.",
+    image: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&q=80&w=1470&ixlib=rb-4.0.3",
+    tags: ["Éducation", "Marketplace", "Side-project"],
   },
   {
-    title: "Quelles prochaines idées entreprendre ?",
-    date: "2024 et après",
-    content: (
-      <ul className="list-disc list-inside space-y-2">
-        <li>
-          <span className="font-medium">Automatisation de la cybersécurité pour PME&nbsp;:</span> développer un outil simple (SaaS) pour monitorer et sécuriser les SI sans expertise technique approfondie.
-        </li>
-        <li>
-          <span className="font-medium">Solutions pour créateurs de contenu&nbsp;:</span> créer des outils qui facilitent la gestion, la visibilité et la valorisation des contenus numériques.
-        </li>
-        <li>
-          <span className="font-medium">Éducation numérique&nbsp;:</span> imaginer de nouveaux formats ou plateformes d’apprentissage adaptés aux enjeux actuels.
-        </li>
-        <li>
-          Et plein d’autres… (Si une idée t’intéresse ou que tu veux collaborer, contacte-moi&nbsp;!)
-        </li>
-      </ul>
-    ),
+    title: "Outil d'automatisation de veille technologique",
+    description: "Solution permettant aux professionnels de rester informés des dernières tendances technologiques dans leur secteur grâce à l'agrégation intelligente de contenus et l'analyse automatisée.",
+    image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=1470&ixlib=rb-4.0.3",
+    tags: ["Automatisation", "IA", "Exploration"],
+  },
+  {
+    title: "Prochaine aventure: Solutions pour PME",
+    description: "Projet en réflexion pour démocratiser l'accès à la cybersécurité pour les PME, avec un outil simple permettant aux entreprises de monitorer et sécuriser leurs systèmes sans expertise technique approfondie.",
+    image: "https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&q=80&w=1470&ixlib=rb-4.0.3",
+    tags: ["Cybersécurité", "PME", "SaaS", "Idée"],
   },
 ];
 
 export const EntrepreneurialProjectsSection = () => {
   return (
     <section id="entrepreneurship" className="section-padding bg-cybersec-dark">
-      <div className="container mx-auto px-4 max-w-2xl">
-        <h2 className="text-3xl font-bold mb-6 text-center">Mes Projets & Idées Entrepreneuriales</h2>
-        <div className="h-1 w-20 bg-primary mx-auto mb-10"></div>
-        <div className="space-y-12">
-          {projects.map((post, idx) => (
-            <article
-              key={post.title}
-              className="bg-cybersec-dark/80 border border-cybersec-light/20 rounded-lg p-8 shadow-lg"
-            >
-              <h3 className="text-2xl font-semibold mb-2">{post.title}</h3>
-              <time className="block text-sm text-gray-400 mb-4">{post.date}</time>
-              <div className="text-gray-300 text-base leading-relaxed">
-                {post.content}
+      <div className="container mx-auto px-4">
+        <div className="max-w-3xl mx-auto text-center mb-16">
+          <h2 className="text-3xl font-bold mb-4">Mes Projets & Idées Entrepreneuriales</h2>
+          <div className="h-1 w-20 bg-primary mx-auto mb-6"></div>
+          <p className="text-lg text-gray-300">
+            Découvrez mon parcours d'entrepreneur digital, des projets lancés aux idées en gestation.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {projects.map((project, index) => (
+            <Card key={index} className="overflow-hidden border border-cybersec-light/20 bg-cybersec-dark/60 backdrop-blur-sm card-hover">
+              <div className="h-48 overflow-hidden">
+                <img 
+                  src={project.image} 
+                  alt={project.title} 
+                  className="w-full h-full object-cover transition-transform duration-700 hover:scale-110"
+                />
               </div>
-            </article>
+              <CardHeader>
+                <CardTitle className="text-xl">{project.title}</CardTitle>
+                <div className="flex flex-wrap gap-2 mt-2">
+                  {project.tags.map((tag, idx) => (
+                    <Badge key={idx} variant="outline" className="bg-primary/10 text-primary border-primary/20">
+                      {tag}
+                    </Badge>
+                  ))}
+                </div>
+              </CardHeader>
+              <CardContent>
+                <CardDescription className="text-gray-300 text-base">{project.description}</CardDescription>
+              </CardContent>
+              <CardFooter className="flex justify-between">
+                {project.link ? (
+                  <Button variant="ghost" className="text-primary hover:text-white hover:bg-primary" onClick={() => window.open(project.link, '_blank')}>
+                    Voir le projet
+                  </Button>
+                ) : (
+                  <Button variant="ghost" className="text-primary hover:text-white hover:bg-primary" disabled>
+                    En développement
+                  </Button>
+                )}
+                <Button variant="outline" size="sm">
+                  En savoir plus
+                </Button>
+              </CardFooter>
+            </Card>
           ))}
         </div>
       </div>
     </section>
   );
 };
-
