@@ -32,6 +32,13 @@ export default {
 					DEFAULT: 'hsl(var(--secondary))',
 					foreground: 'hsl(var(--secondary-foreground))'
 				},
+				cybersec: {
+					DEFAULT: '#1A1F2C',
+					light: '#384158',
+					dark: '#0D1117',
+					accent: '#6E59A5',
+					muted: '#8E9196',
+				},
 				destructive: {
 					DEFAULT: 'hsl(var(--destructive))',
 					foreground: 'hsl(var(--destructive-foreground))'
