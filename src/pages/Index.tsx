@@ -2,6 +2,7 @@
 import { Navbar } from "@/components/Navbar";
 import { HeroSection } from "@/components/HeroSection";
 import { AboutSection } from "@/components/AboutSection";
+import { BlogFeedSection } from "@/components/BlogFeedSection";
 import { ProjectsSection } from "@/components/ProjectsSection";
 import { ContactSection } from "@/components/ContactSection";
 import { Footer } from "@/components/Footer";
@@ -12,6 +13,7 @@ const Index = () => {
       <Navbar />
       <HeroSection />
       <AboutSection />
+      <BlogFeedSection feedUrl="https://your-blog-domain/index.xml" maxItems={4} />
       <ProjectsSection />
       <ContactSection />
       <Footer />
@@ -20,4 +22,3 @@ const Index = () => {
 };
 
 export default Index;
-
