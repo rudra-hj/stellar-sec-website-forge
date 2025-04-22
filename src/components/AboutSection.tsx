@@ -9,7 +9,7 @@ export const AboutSection = () => {
           <h2 className="text-3xl font-bold mb-4">À propos de Rudra</h2>
           <div className="h-1 w-20 bg-primary mx-auto mb-6"></div>
           <p className="text-lg text-gray-300">
-            Ingénieur système passionné par Linux et l'open source, je combine expertise technique et polyvalence pour créer des solutions robustes et élégantes.
+            Passionné par l'innovation technique et l'aventure, je combine des compétences diverses pour créer des solutions uniques et élégantes.
           </p>
         </div>
 
@@ -83,7 +83,7 @@ export const AboutSection = () => {
             <div className="aspect-square relative z-10 rounded-2xl overflow-hidden border-2 border-primary/30 shadow-xl shadow-primary/20">
               <img 
                 src="https://images.unsplash.com/photo-1487887235947-a955ef187fcc"
-                alt="Rudra - Ingénieur système et passionné d'aventure" 
+                alt="Rudra - Ingénieur passionné et aventurier" 
                 className="w-full h-full object-cover"
               />
             </div>
