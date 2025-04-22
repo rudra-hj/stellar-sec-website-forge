@@ -1,6 +1,5 @@
-
 import React, { useEffect, useState } from "react";
-import { Link2, Instagram, Linkedin, RotateCw } from "lucide-react";
+import { Link2, Instagram, Linkedin, Shuffle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 
@@ -19,7 +18,6 @@ export const LinkstackSection = () => {
   const [isRotating, setIsRotating] = useState(false);
   const [allOtherLinks, setAllOtherLinks] = useState<Array<{ href: string; text: string }>>([]);
 
-  // Function to get a new random link
   const getNewRandomLink = () => {
     if (allOtherLinks.length === 0) return null;
     return allOtherLinks[Math.floor(Math.random() * allOtherLinks.length)];
@@ -72,24 +70,20 @@ export const LinkstackSection = () => {
           text: a.textContent?.trim() || a.href,
         }));
 
-        // Filtrer pour trouver Instagram et LinkedIn
         const instagram = links.find(l => l.text.toLowerCase().includes("instagram"));
         const linkedin = links.find(l => 
           l.text.toLowerCase().includes("linkedin") || 
           l.href.toLowerCase().includes("linkedin.com")
         );
         
-        // Stocker tous les autres liens qui ne sont ni Instagram ni LinkedIn
         const otherLinks = links.filter(l => 
           !l.text.toLowerCase().includes("instagram") && 
           !l.text.toLowerCase().includes("linkedin") &&
           !l.href.toLowerCase().includes("linkedin.com")
         );
         
-        // Stocker tous les autres liens disponibles pour la rotation
         setAllOtherLinks(otherLinks);
         
-        // Sélectionner un lien aléatoire initial
         const initialRandomLink = otherLinks.length > 0 
           ? otherLinks[Math.floor(Math.random() * otherLinks.length)]
           : null;
@@ -121,16 +115,13 @@ export const LinkstackSection = () => {
       });
   }, []);
 
-  // Effect for rotating random links every 3 seconds
   useEffect(() => {
     if (allOtherLinks.length === 0) return;
 
     const rotateLink = () => {
       setIsRotating(true);
       
-      // Select a new random link that's different from the current one
       let newLink = getNewRandomLink();
-      // Try to ensure we get a different link if possible
       if (newLink && randomLink && allOtherLinks.length > 1) {
         let attempts = 0;
         while (newLink.href === randomLink.href && attempts < 5) {
@@ -141,13 +132,9 @@ export const LinkstackSection = () => {
       
       setRandomLink(newLink);
       
-      // Reset rotation animation after 500ms
       setTimeout(() => setIsRotating(false), 500);
     };
 
-    // Initial rotation is not needed as we already set an initial random link
-    
-    // Set up interval for changing links every 3 seconds
     const interval = setInterval(rotateLink, 3000);
 
     return () => clearInterval(interval);
@@ -160,15 +147,20 @@ export const LinkstackSection = () => {
       aria-labelledby="linkstack-heading"
     >
       <div className="container mx-auto px-4 flex flex-col items-center">
-        <div className="flex items-center gap-2 mb-8">
+        <a
+          href="https://links.rudra.it/@rudra"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="group flex items-center gap-2 mb-8 hover:text-primary transition-colors"
+        >
           <Link2 className="text-primary w-7 h-7" />
           <h2
             id="linkstack-heading"
-            className="text-2xl sm:text-3xl font-bold text-white"
+            className="text-2xl sm:text-3xl font-bold text-white group-hover:text-primary transition-colors"
           >
             Me retrouver en ligne
           </h2>
-        </div>
+        </a>
 
         {loading && (
           <span className="text-cybersec-muted text-lg">Chargement...</span>
@@ -178,7 +170,6 @@ export const LinkstackSection = () => {
         {data && (
           <div className="w-full max-w-4xl">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {/* Instagram Link */}
               {data.links.find(l => l.text.toLowerCase().includes("instagram")) && (
                 <a
                   href={data.links.find(l => l.text.toLowerCase().includes("instagram"))?.href}
@@ -197,7 +188,6 @@ export const LinkstackSection = () => {
                 </a>
               )}
 
-              {/* LinkedIn Link */}
               {data.links.find(l => l.href.toLowerCase().includes("linkedin.com")) && (
                 <a
                   href={data.links.find(l => l.href.toLowerCase().includes("linkedin.com"))?.href}
@@ -216,7 +206,6 @@ export const LinkstackSection = () => {
                 </a>
               )}
 
-              {/* Random Link */}
               {randomLink && (
                 <a
                   href={randomLink.href}
@@ -227,7 +216,7 @@ export const LinkstackSection = () => {
                   <Card className="h-full transform transition-all duration-300 hover:scale-105 hover:shadow-xl bg-cybersec-dark/50 border-cybersec-light/40 hover:border-primary/60">
                     <CardContent className="p-6 flex flex-col items-center justify-center gap-4">
                       <div className="flex items-center gap-2">
-                        <RotateCw 
+                        <Shuffle 
                           className={`w-8 h-8 text-primary group-hover:scale-110 transition-transform ${
                             isRotating ? 'animate-spin' : ''
                           }`} 
