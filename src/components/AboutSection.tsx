@@ -80,10 +80,10 @@ export const AboutSection = () => {
           </div>
 
           <div className="order-1 lg:order-2 relative">
-            <div className="aspect-square relative z-10 rounded-2xl overflow-hidden border-2 border-primary/30 shadow-xl shadow-primary/20">
+            <div className="aspect-square relative z-10 rounded-2xl overflow-hidden border-2 border-primary/30 shadow-xl shadow-primary/20 w-3/4 mx-auto">
               <img 
-                src="https://images.unsplash.com/photo-1487887235947-a955ef187fcc"
-                alt="Rudra - Ingénieur passionné et aventurier" 
+                src="/placeholder.svg"
+                alt="Rudra - Portrait personnel" 
                 className="w-full h-full object-cover"
               />
             </div>
