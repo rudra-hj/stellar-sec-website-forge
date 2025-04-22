@@ -1,5 +1,5 @@
 
-import { Wrench, Motorcycle, Camera, Code, Terminal, Settings } from "lucide-react";
+import { Wrench, Bike, Camera, Code, Terminal, Settings } from "lucide-react";
 
 export const AboutSection = () => {
   return (
@@ -60,7 +60,7 @@ export const AboutSection = () => {
               </div>
               <div className="flex items-start">
                 <div className="mt-1 mr-4 p-2 rounded-lg bg-primary/20">
-                  <Motorcycle className="h-5 w-5 text-primary" />
+                  <Bike className="h-5 w-5 text-primary" />
                 </div>
                 <div>
                   <h4 className="font-semibold">Deux-roues</h4>
