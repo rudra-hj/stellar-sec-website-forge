@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from "react";
 import { Link2, Instagram, Linkedin, Shuffle } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -214,18 +215,23 @@ export const LinkstackSection = () => {
                   className="group"
                 >
                   <Card className="h-full transform transition-all duration-300 hover:scale-105 hover:shadow-xl bg-cybersec-dark/50 border-cybersec-light/40 hover:border-primary/60">
-                    <CardContent className="p-6 flex flex-col items-center justify-center gap-4">
+                    <CardContent className="p-6 flex flex-col items-center justify-center gap-4 h-[130px]">
                       <div className="flex items-center gap-2">
                         <Shuffle 
                           className={`w-8 h-8 text-primary group-hover:scale-110 transition-transform ${
-                            isRotating ? 'animate-spin' : ''
+                            isRotating ? 'animate-[spin_0.5s_ease-in-out]' : ''
                           }`} 
+                          style={{ 
+                            transformOrigin: 'center',
+                            transform: isRotating ? 'rotateY(180deg)' : 'rotateY(0deg)',
+                            transition: 'transform 0.5s ease-in-out'
+                          }}
                         />
                         <span className="text-xs font-medium text-cybersec-accent">
                           Lien surprise
                         </span>
                       </div>
-                      <span className="text-lg font-semibold text-white group-hover:text-primary transition-colors">
+                      <span className="text-lg font-semibold text-white group-hover:text-primary transition-colors text-center line-clamp-2">
                         {randomLink.text}
                       </span>
                     </CardContent>
@@ -239,3 +245,4 @@ export const LinkstackSection = () => {
     </section>
   );
 };
+
