@@ -1,5 +1,5 @@
 
-import { Telescope, Bike, Camera, Code, Terminal, Globe } from "lucide-react";
+import { Wrench, Motorcycle, Camera, Code, Terminal, Settings } from "lucide-react";
 
 export const AboutSection = () => {
   return (
@@ -9,19 +9,18 @@ export const AboutSection = () => {
           <h2 className="text-3xl font-bold mb-4">À propos de Rudra</h2>
           <div className="h-1 w-20 bg-primary mx-auto mb-6"></div>
           <p className="text-lg text-gray-300">
-            Ingénieur système spécialisé dans les technologies open source et Linux, passionné par la sécurisation des infrastructures et la contribution aux projets libres.
+            Ingénieur système passionné par Linux et l'open source, je combine expertise technique et polyvalence pour créer des solutions robustes et élégantes.
           </p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div className="order-2 lg:order-1">
-            <h3 className="text-2xl font-bold mb-4">Expertise Technique</h3>
+            <h3 className="text-2xl font-bold mb-4">Ma vision</h3>
             <p className="mb-6 text-gray-300">
-              Avec une maîtrise en cybersécurité, je conçois, mets en place et maintiens des systèmes robustes utilisant les meilleures pratiques open source
-              pour assurer confidentialité, performance et évolutivité dans les environnements professionnels.
+              Je suis convaincu qu'une expertise technique seule ne suffit pas. C'est pourquoi j'apporte à chaque projet un mélange unique de compétences acquises dans divers domaines de ma vie. Que ce soit la précision que j'ai développée en tant que motard ou le sens esthétique issu de ma passion pour la photographie, je cherche toujours à enrichir mon travail technique d'une dimension supplémentaire.
             </p>
 
-            <h3 className="text-2xl font-bold mb-4">Passions</h3>
+            <h3 className="text-2xl font-bold mb-4">Ce qui me définit</h3>
             <div className="grid grid-cols-2 gap-6">
               <div className="flex items-start">
                 <div className="mt-1 mr-4 p-2 rounded-lg bg-primary/20">
@@ -29,7 +28,7 @@ export const AboutSection = () => {
                 </div>
                 <div>
                   <h4 className="font-semibold">Open Source</h4>
-                  <p className="text-sm text-gray-400">Contributeur et passionné des technologies libres</p>
+                  <p className="text-sm text-gray-400">Passionné par les technologies libres</p>
                 </div>
               </div>
               <div className="flex items-start">
@@ -38,7 +37,7 @@ export const AboutSection = () => {
                 </div>
                 <div>
                   <h4 className="font-semibold">Linux</h4>
-                  <p className="text-sm text-gray-400">Expertises systèmes et administration</p>
+                  <p className="text-sm text-gray-400">Expert en administration système</p>
                 </div>
               </div>
               <div className="flex items-start">
@@ -47,34 +46,34 @@ export const AboutSection = () => {
                 </div>
                 <div>
                   <h4 className="font-semibold">Photographie</h4>
-                  <p className="text-sm text-gray-400">Capturer la beauté du monde</p>
+                  <p className="text-sm text-gray-400">L'art de capturer l'instant</p>
                 </div>
               </div>
               <div className="flex items-start">
                 <div className="mt-1 mr-4 p-2 rounded-lg bg-primary/20">
-                  <Telescope className="h-5 w-5 text-primary" />
+                  <Settings className="h-5 w-5 text-primary" />
                 </div>
                 <div>
-                  <h4 className="font-semibold">Astronomie</h4>
-                  <p className="text-sm text-gray-400">Exploration du cosmos</p>
+                  <h4 className="font-semibold">Perfectionnisme</h4>
+                  <p className="text-sm text-gray-400">Attention aux moindres détails</p>
                 </div>
               </div>
               <div className="flex items-start">
                 <div className="mt-1 mr-4 p-2 rounded-lg bg-primary/20">
-                  <Bike className="h-5 w-5 text-primary" />
+                  <Motorcycle className="h-5 w-5 text-primary" />
                 </div>
                 <div>
-                  <h4 className="font-semibold">Cyclisme</h4>
-                  <p className="text-sm text-gray-400">Passionné par les aventures en plein air</p>
+                  <h4 className="font-semibold">Deux-roues</h4>
+                  <p className="text-sm text-gray-400">Voyages et esprit d'aventure</p>
                 </div>
               </div>
               <div className="flex items-start">
                 <div className="mt-1 mr-4 p-2 rounded-lg bg-primary/20">
-                  <Globe className="h-5 w-5 text-primary" />
+                  <Wrench className="h-5 w-5 text-primary" />
                 </div>
                 <div>
-                  <h4 className="font-semibold">Sécurité Informatique</h4>
-                  <p className="text-sm text-gray-400">Protection des infrastructures digitales</p>
+                  <h4 className="font-semibold">Polyvalence</h4>
+                  <p className="text-sm text-gray-400">Adaptabilité et résolution de problèmes</p>
                 </div>
               </div>
             </div>
@@ -83,8 +82,8 @@ export const AboutSection = () => {
           <div className="order-1 lg:order-2 relative">
             <div className="aspect-square relative z-10 rounded-2xl overflow-hidden border-2 border-primary/30 shadow-xl shadow-primary/20">
               <img 
-                src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&q=80&w=1469&ixlib=rb-4.0.3" 
-                alt="Ingénieur système Rudra travaillant" 
+                src="https://images.unsplash.com/photo-1487887235947-a955ef187fcc"
+                alt="Rudra - Ingénieur système et passionné d'aventure" 
                 className="w-full h-full object-cover"
               />
             </div>
@@ -96,4 +95,3 @@ export const AboutSection = () => {
     </section>
   );
 };
-
