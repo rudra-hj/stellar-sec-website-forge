@@ -1,6 +1,6 @@
 
 import React, { useEffect, useState } from "react";
-import { Link2, Instagram, Linkedin } from "lucide-react";
+import { Link2, Instagram, Linkedin, Shuffle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 
@@ -66,29 +66,39 @@ export const LinkstackSection = () => {
 
         // Filtrer pour trouver Instagram et LinkedIn
         const instagram = links.find(l => l.text.toLowerCase().includes("instagram"));
-        const linkedin = links.find(l => l.text.toLowerCase().includes("linkedin"));
+        const linkedin = links.find(l => 
+          l.text.toLowerCase().includes("linkedin") || 
+          l.href.toLowerCase().includes("linkedin.com")
+        );
         
         // Sélectionner un lien aléatoire qui n'est ni Instagram ni LinkedIn
         const otherLinks = links.filter(l => 
           !l.text.toLowerCase().includes("instagram") && 
-          !l.text.toLowerCase().includes("linkedin")
+          !l.text.toLowerCase().includes("linkedin") &&
+          !l.href.toLowerCase().includes("linkedin.com")
         );
         const randomLinkIndex = Math.floor(Math.random() * otherLinks.length);
         setRandomLink(otherLinks[randomLinkIndex]);
+
+        const displayLinks = [
+          instagram,
+          linkedin,
+          otherLinks[randomLinkIndex]
+        ].filter(Boolean) as Array<{ href: string; text: string }>;
+
+        console.log("Links found:", displayLinks);
+        console.log("LinkedIn found:", linkedin);
 
         setData({
           title,
           description,
           url: "https://links.rudra.it/@rudra",
-          links: [
-            instagram,
-            linkedin,
-            otherLinks[randomLinkIndex]
-          ].filter(Boolean) as Array<{ href: string; text: string }>,
+          links: displayLinks
         });
         setLoading(false);
       })
-      .catch(() => {
+      .catch((err) => {
+        console.error("Error fetching data:", err);
         setError(
           "Impossible de charger le contenu de Linkstack. Essayez plus tard."
         );
@@ -121,30 +131,43 @@ export const LinkstackSection = () => {
         {data && (
           <div className="w-full max-w-4xl">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {data.links.map((link, index) => (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group"
-                >
-                  <Card className="h-full transform transition-all duration-300 hover:scale-105 hover:shadow-xl bg-cybersec-dark/50 border-cybersec-light/40 hover:border-primary/60">
-                    <CardContent className="p-6 flex flex-col items-center justify-center gap-4">
-                      {link.text.toLowerCase().includes("instagram") ? (
-                        <Instagram className="w-8 h-8 text-primary group-hover:scale-110 transition-transform" />
-                      ) : link.text.toLowerCase().includes("linkedin") ? (
-                        <Linkedin className="w-8 h-8 text-primary group-hover:scale-110 transition-transform" />
-                      ) : (
-                        <Link2 className="w-8 h-8 text-primary group-hover:scale-110 transition-transform" />
-                      )}
-                      <span className="text-lg font-semibold text-white group-hover:text-primary transition-colors">
-                        {link.text}
-                      </span>
-                    </CardContent>
-                  </Card>
-                </a>
-              ))}
+              {data.links.map((link, index) => {
+                const isInstagram = link.text.toLowerCase().includes("instagram") || link.href.toLowerCase().includes("instagram.com");
+                const isLinkedIn = link.text.toLowerCase().includes("linkedin") || link.href.toLowerCase().includes("linkedin.com");
+                const isRandomLink = !isInstagram && !isLinkedIn;
+                
+                return (
+                  <a
+                    key={link.href}
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group"
+                  >
+                    <Card className={`h-full transform transition-all duration-300 hover:scale-105 hover:shadow-xl bg-cybersec-dark/50 border-cybersec-light/40 hover:border-primary/60 ${
+                      isRandomLink ? "animate-pulse" : ""
+                    }`}>
+                      <CardContent className="p-6 flex flex-col items-center justify-center gap-4">
+                        {isInstagram ? (
+                          <Instagram className="w-8 h-8 text-primary group-hover:scale-110 transition-transform" />
+                        ) : isLinkedIn ? (
+                          <Linkedin className="w-8 h-8 text-primary group-hover:scale-110 transition-transform" />
+                        ) : (
+                          <div className="flex items-center gap-2">
+                            <Shuffle className="w-8 h-8 text-primary group-hover:scale-110 transition-transform animate-[spin_3s_linear_infinite]" />
+                            <span className="text-xs font-medium text-cybersec-accent animate-pulse">Lien aléatoire</span>
+                          </div>
+                        )}
+                        <span className={`text-lg font-semibold text-white group-hover:text-primary transition-colors ${
+                          isRandomLink ? "animate-fade-in" : ""
+                        }`}>
+                          {link.text}
+                        </span>
+                      </CardContent>
+                    </Card>
+                  </a>
+                );
+              })}
             </div>
           </div>
         )}
