@@ -1,6 +1,5 @@
-
 import React, { useEffect, useState } from "react";
-import { Link2, Instagram, Linkedin, Shuffle } from "lucide-react";
+import { Link2, Instagram, Linkedin, Package } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 
@@ -16,6 +15,17 @@ export const LinkstackSection = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [randomLink, setRandomLink] = useState<{ href: string; text: string } | null>(null);
+  const [isRotating, setIsRotating] = useState(false);
+
+  // Function to get a new random link
+  const getNewRandomLink = (links: Array<{ href: string; text: string }>) => {
+    const otherLinks = links.filter(l => 
+      !l.text.toLowerCase().includes("instagram") && 
+      !l.text.toLowerCase().includes("linkedin") &&
+      !l.href.toLowerCase().includes("linkedin.com")
+    );
+    return otherLinks[Math.floor(Math.random() * otherLinks.length)];
+  };
 
   useEffect(() => {
     fetch(
@@ -106,6 +116,23 @@ export const LinkstackSection = () => {
       });
   }, []);
 
+  // Effect for rotating random links every 3 seconds
+  useEffect(() => {
+    if (!data?.links) return;
+
+    const rotateLink = () => {
+      setIsRotating(true);
+      const newLink = getNewRandomLink(data.links);
+      setRandomLink(newLink);
+      setTimeout(() => setIsRotating(false), 500); // Reset rotation after animation
+    };
+
+    rotateLink(); // Initial random link
+    const interval = setInterval(rotateLink, 3000);
+
+    return () => clearInterval(interval);
+  }, [data?.links]);
+
   return (
     <section
       className="w-full bg-cybersec-light/20 py-12 my-6"
@@ -131,43 +158,71 @@ export const LinkstackSection = () => {
         {data && (
           <div className="w-full max-w-4xl">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {data.links.map((link, index) => {
-                const isInstagram = link.text.toLowerCase().includes("instagram") || link.href.toLowerCase().includes("instagram.com");
-                const isLinkedIn = link.text.toLowerCase().includes("linkedin") || link.href.toLowerCase().includes("linkedin.com");
-                const isRandomLink = !isInstagram && !isLinkedIn;
-                
-                return (
-                  <a
-                    key={link.href}
-                    href={link.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="group"
-                  >
-                    <Card className={`h-full transform transition-all duration-300 hover:scale-105 hover:shadow-xl bg-cybersec-dark/50 border-cybersec-light/40 hover:border-primary/60 ${
-                      isRandomLink ? "animate-pulse" : ""
-                    }`}>
-                      <CardContent className="p-6 flex flex-col items-center justify-center gap-4">
-                        {isInstagram ? (
-                          <Instagram className="w-8 h-8 text-primary group-hover:scale-110 transition-transform" />
-                        ) : isLinkedIn ? (
-                          <Linkedin className="w-8 h-8 text-primary group-hover:scale-110 transition-transform" />
-                        ) : (
-                          <div className="flex items-center gap-2">
-                            <Shuffle className="w-8 h-8 text-primary group-hover:scale-110 transition-transform animate-[spin_3s_linear_infinite]" />
-                            <span className="text-xs font-medium text-cybersec-accent animate-pulse">Lien aléatoire</span>
-                          </div>
-                        )}
-                        <span className={`text-lg font-semibold text-white group-hover:text-primary transition-colors ${
-                          isRandomLink ? "animate-fade-in" : ""
-                        }`}>
-                          {link.text}
+              {/* Instagram Link */}
+              {data.links.find(l => l.text.toLowerCase().includes("instagram")) && (
+                <a
+                  href={data.links.find(l => l.text.toLowerCase().includes("instagram"))?.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group"
+                >
+                  <Card className="h-full transform transition-all duration-300 hover:scale-105 hover:shadow-xl bg-cybersec-dark/50 border-cybersec-light/40 hover:border-primary/60">
+                    <CardContent className="p-6 flex flex-col items-center justify-center gap-4">
+                      <Instagram className="w-8 h-8 text-primary group-hover:scale-110 transition-transform" />
+                      <span className="text-lg font-semibold text-white group-hover:text-primary transition-colors">
+                        Instagram
+                      </span>
+                    </CardContent>
+                  </Card>
+                </a>
+              )}
+
+              {/* LinkedIn Link */}
+              {data.links.find(l => l.href.toLowerCase().includes("linkedin.com")) && (
+                <a
+                  href={data.links.find(l => l.href.toLowerCase().includes("linkedin.com"))?.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group"
+                >
+                  <Card className="h-full transform transition-all duration-300 hover:scale-105 hover:shadow-xl bg-cybersec-dark/50 border-cybersec-light/40 hover:border-primary/60">
+                    <CardContent className="p-6 flex flex-col items-center justify-center gap-4">
+                      <Linkedin className="w-8 h-8 text-primary group-hover:scale-110 transition-transform" />
+                      <span className="text-lg font-semibold text-white group-hover:text-primary transition-colors">
+                        LinkedIn
+                      </span>
+                    </CardContent>
+                  </Card>
+                </a>
+              )}
+
+              {/* Random Link */}
+              {randomLink && (
+                <a
+                  href={randomLink.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group"
+                >
+                  <Card className="h-full transform transition-all duration-300 hover:scale-105 hover:shadow-xl bg-cybersec-dark/50 border-cybersec-light/40 hover:border-primary/60">
+                    <CardContent className="p-6 flex flex-col items-center justify-center gap-4">
+                      <div className="flex items-center gap-2">
+                        <Package 
+                          className={`w-8 h-8 text-primary group-hover:scale-110 transition-transform ${
+                            isRotating ? 'animate-spin' : ''
+                          }`} 
+                        />
+                        <span className="text-xs font-medium text-cybersec-accent">
+                          Lien surprise
                         </span>
-                      </CardContent>
-                    </Card>
-                  </a>
-                );
-              })}
+                      </div>
+                      <span className="text-lg font-semibold text-white group-hover:text-primary transition-colors">
+                        {randomLink.text}
+                      </span>
+                    </CardContent>
+                  </Card>
+                </a>
+              )}
             </div>
           </div>
         )}
