@@ -1,5 +1,6 @@
+
 import React, { useEffect, useState } from "react";
-import { Link2, Instagram, Linkedin, Package } from "lucide-react";
+import { Link2, Instagram, Linkedin, RotateCw } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 
@@ -16,15 +17,12 @@ export const LinkstackSection = () => {
   const [error, setError] = useState<string | null>(null);
   const [randomLink, setRandomLink] = useState<{ href: string; text: string } | null>(null);
   const [isRotating, setIsRotating] = useState(false);
+  const [allOtherLinks, setAllOtherLinks] = useState<Array<{ href: string; text: string }>>([]);
 
   // Function to get a new random link
-  const getNewRandomLink = (links: Array<{ href: string; text: string }>) => {
-    const otherLinks = links.filter(l => 
-      !l.text.toLowerCase().includes("instagram") && 
-      !l.text.toLowerCase().includes("linkedin") &&
-      !l.href.toLowerCase().includes("linkedin.com")
-    );
-    return otherLinks[Math.floor(Math.random() * otherLinks.length)];
+  const getNewRandomLink = () => {
+    if (allOtherLinks.length === 0) return null;
+    return allOtherLinks[Math.floor(Math.random() * allOtherLinks.length)];
   };
 
   useEffect(() => {
@@ -81,19 +79,26 @@ export const LinkstackSection = () => {
           l.href.toLowerCase().includes("linkedin.com")
         );
         
-        // Sélectionner un lien aléatoire qui n'est ni Instagram ni LinkedIn
+        // Stocker tous les autres liens qui ne sont ni Instagram ni LinkedIn
         const otherLinks = links.filter(l => 
           !l.text.toLowerCase().includes("instagram") && 
           !l.text.toLowerCase().includes("linkedin") &&
           !l.href.toLowerCase().includes("linkedin.com")
         );
-        const randomLinkIndex = Math.floor(Math.random() * otherLinks.length);
-        setRandomLink(otherLinks[randomLinkIndex]);
+        
+        // Stocker tous les autres liens disponibles pour la rotation
+        setAllOtherLinks(otherLinks);
+        
+        // Sélectionner un lien aléatoire initial
+        const initialRandomLink = otherLinks.length > 0 
+          ? otherLinks[Math.floor(Math.random() * otherLinks.length)]
+          : null;
+        setRandomLink(initialRandomLink);
 
         const displayLinks = [
           instagram,
           linkedin,
-          otherLinks[randomLinkIndex]
+          initialRandomLink
         ].filter(Boolean) as Array<{ href: string; text: string }>;
 
         console.log("Links found:", displayLinks);
@@ -118,20 +123,35 @@ export const LinkstackSection = () => {
 
   // Effect for rotating random links every 3 seconds
   useEffect(() => {
-    if (!data?.links) return;
+    if (allOtherLinks.length === 0) return;
 
     const rotateLink = () => {
       setIsRotating(true);
-      const newLink = getNewRandomLink(data.links);
+      
+      // Select a new random link that's different from the current one
+      let newLink = getNewRandomLink();
+      // Try to ensure we get a different link if possible
+      if (newLink && randomLink && allOtherLinks.length > 1) {
+        let attempts = 0;
+        while (newLink.href === randomLink.href && attempts < 5) {
+          newLink = getNewRandomLink();
+          attempts++;
+        }
+      }
+      
       setRandomLink(newLink);
-      setTimeout(() => setIsRotating(false), 500); // Reset rotation after animation
+      
+      // Reset rotation animation after 500ms
+      setTimeout(() => setIsRotating(false), 500);
     };
 
-    rotateLink(); // Initial random link
+    // Initial rotation is not needed as we already set an initial random link
+    
+    // Set up interval for changing links every 3 seconds
     const interval = setInterval(rotateLink, 3000);
 
     return () => clearInterval(interval);
-  }, [data?.links]);
+  }, [allOtherLinks, randomLink]);
 
   return (
     <section
@@ -207,7 +227,7 @@ export const LinkstackSection = () => {
                   <Card className="h-full transform transition-all duration-300 hover:scale-105 hover:shadow-xl bg-cybersec-dark/50 border-cybersec-light/40 hover:border-primary/60">
                     <CardContent className="p-6 flex flex-col items-center justify-center gap-4">
                       <div className="flex items-center gap-2">
-                        <Package 
+                        <RotateCw 
                           className={`w-8 h-8 text-primary group-hover:scale-110 transition-transform ${
                             isRotating ? 'animate-spin' : ''
                           }`} 
