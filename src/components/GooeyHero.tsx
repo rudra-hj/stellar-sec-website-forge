@@ -40,49 +40,52 @@ export const GooeyHero: React.FC<GooeyHeroProps> = ({
 
   return (
     <section className="relative w-full min-h-screen flex items-center overflow-hidden">
-      {/* Background overlay with reduced opacity for better gooey visibility */}
-      <div className="absolute inset-0 bg-cybersec-dark/70 z-10"></div>
-      
-      {/* Gooey Cell Canvas */}
-      {mounted && (
-        <div className="absolute inset-0 z-0">
-          <ThreeCanvas className="w-full h-full" />
-        </div>
-      )}
+      {/* Dark background */}
+      <div className="absolute inset-0 bg-cybersec-dark z-0"></div>
       
       {/* Hero Content */}
       <div className="container mx-auto px-4 relative z-20">
-        <div className="max-w-3xl">
-          <h1 className="text-4xl md:text-6xl font-bold mb-4 text-white leading-tight">
-            {title}
-          </h1>
-          <p className="text-xl md:text-2xl mb-8 text-gray-200">
-            {subtitle}
-          </p>
-          
-          {/* Call to Action Buttons */}
-          <div className="flex flex-wrap gap-4">
-            {ctaText && (
-              <Button 
-                size="lg" 
-                onClick={ctaAction}
-                className="px-8"
-              >
-                {ctaText}
-              </Button>
-            )}
+        <div className="flex flex-col md:flex-row items-center gap-8">
+          {/* Text content - now on the left side */}
+          <div className="md:w-1/2">
+            <h1 className="text-4xl md:text-6xl font-bold mb-4 text-white leading-tight">
+              {title}
+            </h1>
+            <p className="text-xl md:text-2xl mb-8 text-gray-200">
+              {subtitle}
+            </p>
             
-            {secondaryCtaText && (
-              <Button 
-                size="lg" 
-                variant="outline" 
-                onClick={secondaryCtaAction}
-                className="px-8 border-white/20 hover:bg-white/10"
-              >
-                {secondaryCtaText}
-              </Button>
-            )}
+            {/* Call to Action Buttons */}
+            <div className="flex flex-wrap gap-4">
+              {ctaText && (
+                <Button 
+                  size="lg" 
+                  onClick={ctaAction}
+                  className="px-8"
+                >
+                  {ctaText}
+                </Button>
+              )}
+              
+              {secondaryCtaText && (
+                <Button 
+                  size="lg" 
+                  variant="outline" 
+                  onClick={secondaryCtaAction}
+                  className="px-8 border-white/20 hover:bg-white/10"
+                >
+                  {secondaryCtaText}
+                </Button>
+              )}
+            </div>
           </div>
+          
+          {/* Gooey Cell Canvas - now on the right side */}
+          {mounted && (
+            <div className="w-full md:w-1/2 aspect-square relative z-10">
+              <ThreeCanvas className="w-full h-full rounded-full" />
+            </div>
+          )}
         </div>
       </div>
       
