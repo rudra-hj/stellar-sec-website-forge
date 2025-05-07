@@ -64,7 +64,10 @@ export const EntrepreneurialProjectsSection = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {projects.map((project, index) => (
             <Card key={index} className="overflow-hidden border border-cybersec-light/20 bg-cybersec-dark/60 backdrop-blur-sm card-hover">
-              <div className="h-48 overflow-hidden">
+              <div 
+                className="h-48 overflow-hidden cursor-pointer" 
+                onClick={() => navigate(`/project/${index}`)}
+              >
                 <img 
                   src={project.image} 
                   alt={project.title} 
@@ -72,7 +75,12 @@ export const EntrepreneurialProjectsSection = () => {
                 />
               </div>
               <CardHeader>
-                <CardTitle className="text-xl">{project.title}</CardTitle>
+                <CardTitle 
+                  className="text-xl cursor-pointer hover:text-primary transition-colors"
+                  onClick={() => navigate(`/project/${index}`)}
+                >
+                  {project.title}
+                </CardTitle>
                 <div className="flex flex-wrap gap-2 mt-2">
                   {project.tags.map((tag, idx) => (
                     <Badge key={idx} variant="outline" className="bg-primary/10 text-primary border-primary/20">
@@ -85,29 +93,30 @@ export const EntrepreneurialProjectsSection = () => {
                 <CardDescription className="text-gray-300 text-base">{project.description}</CardDescription>
               </CardContent>
               <CardFooter className="flex justify-between">
-                {/* "Voir le projet" = Afficher l'article détaillé sur le site actuel */}
+                {/* "Voir le projet" = Ouvre le site externe du projet */}
                 <Button 
                   variant="ghost" 
                   className="text-primary hover:text-white hover:bg-primary"
-                  onClick={() => navigate(`/project/${index}`)}
+                  onClick={() => {
+                    if (project.link) {
+                      window.open(project.link, '_blank');
+                    } else {
+                      // Si pas de lien externe, on peut rediriger vers la page détaillée
+                      navigate(`/project/${index}`);
+                    }
+                  }}
                 >
                   Voir le projet
                 </Button>
                 
-                {/* "En savoir plus" = Accès au site si présent */}
-                {project.link ? (
-                  <Button 
-                    variant="outline" 
-                    size="sm"
-                    onClick={() => window.open(project.link, '_blank')}
-                  >
-                    En savoir plus
-                  </Button>
-                ) : (
-                  <Button variant="outline" size="sm" disabled>
-                    En savoir plus
-                  </Button>
-                )}
+                {/* "En savoir plus" = Afficher la page détaillée */}
+                <Button 
+                  variant="outline" 
+                  size="sm"
+                  onClick={() => navigate(`/project/${index}`)}
+                >
+                  En savoir plus
+                </Button>
               </CardFooter>
             </Card>
           ))}
