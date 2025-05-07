@@ -7,6 +7,14 @@ import { Link } from "react-router-dom";
 export const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+  const scrollToSection = (sectionId: string) => {
+    setIsMenuOpen(false);
+    const section = document.getElementById(sectionId);
+    if (section) {
+      section.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-cybersec-dark/80 backdrop-blur-md border-b border-cybersec-light/20">
       <div className="container mx-auto px-4 py-3 flex items-center justify-between">
@@ -17,16 +25,15 @@ export const Navbar = () => {
 
         {/* Desktop Navigation */}
         <div className="hidden md:flex items-center space-x-6">
-          <a href="#home" className="hover:text-primary transition-colors">Home</a>
-          <a href="#about" className="hover:text-primary transition-colors">About</a>
-          <a href="#services" className="hover:text-primary transition-colors">Services</a>
-          <a href="#projects" className="hover:text-primary transition-colors">Projects</a>
-          <a href="#contact" className="hover:text-primary transition-colors">Contact</a>
+          <a href="#home" onClick={() => scrollToSection('home')} className="hover:text-primary transition-colors">Home</a>
+          <a href="#about" onClick={() => scrollToSection('about')} className="hover:text-primary transition-colors">About</a>
+          <a href="#projects" onClick={() => scrollToSection('entrepreneurship')} className="hover:text-primary transition-colors">Projects</a>
+          <a href="#contact" onClick={() => scrollToSection('contact')} className="hover:text-primary transition-colors">Contact</a>
           
           {/* Social Links */}
           <div className="flex items-center space-x-2">
             <a
-              href="https://linkedin.com/in/rudra-profile"
+              href="https://linkedin.com/in/rudra-raw/"
               target="_blank"
               rel="noopener noreferrer"
               className="p-2 hover:text-primary transition-colors"
@@ -45,7 +52,12 @@ export const Navbar = () => {
             </a>
           </div>
           
-          <Button variant="default">Get Started</Button>
+          <Button 
+            variant="default" 
+            onClick={() => scrollToSection('contact')}
+          >
+            Say Hello
+          </Button>
         </div>
 
         {/* Mobile Menu Button */}
@@ -60,16 +72,15 @@ export const Navbar = () => {
       {isMenuOpen && (
         <div className="md:hidden bg-cybersec-dark/95 backdrop-blur-lg border-b border-cybersec-light/20">
           <div className="container mx-auto px-4 py-3 flex flex-col space-y-4">
-            <a href="#home" onClick={() => setIsMenuOpen(false)} className="py-2 hover:text-primary transition-colors">Home</a>
-            <a href="#about" onClick={() => setIsMenuOpen(false)} className="py-2 hover:text-primary transition-colors">About</a>
-            <a href="#services" onClick={() => setIsMenuOpen(false)} className="py-2 hover:text-primary transition-colors">Services</a>
-            <a href="#projects" onClick={() => setIsMenuOpen(false)} className="py-2 hover:text-primary transition-colors">Projects</a>
-            <a href="#contact" onClick={() => setIsMenuOpen(false)} className="py-2 hover:text-primary transition-colors">Contact</a>
+            <a href="#home" onClick={() => scrollToSection('home')} className="py-2 hover:text-primary transition-colors">Home</a>
+            <a href="#about" onClick={() => scrollToSection('about')} className="py-2 hover:text-primary transition-colors">About</a>
+            <a href="#projects" onClick={() => scrollToSection('entrepreneurship')} className="py-2 hover:text-primary transition-colors">Projects</a>
+            <a href="#contact" onClick={() => scrollToSection('contact')} className="py-2 hover:text-primary transition-colors">Contact</a>
             
             {/* Social Links Mobile */}
             <div className="flex items-center space-x-4 py-2">
               <a
-                href="https://linkedin.com/in/rudra-profile"
+                href="https://linkedin.com/in/rudra-raw/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hover:text-primary transition-colors"
@@ -90,7 +101,13 @@ export const Navbar = () => {
               </a>
             </div>
             
-            <Button variant="default" onClick={() => setIsMenuOpen(false)} className="w-full">Get Started</Button>
+            <Button 
+              variant="default" 
+              onClick={() => scrollToSection('contact')}
+              className="w-full"
+            >
+              Say Hello
+            </Button>
           </div>
         </div>
       )}

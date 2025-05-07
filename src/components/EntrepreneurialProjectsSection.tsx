@@ -96,7 +96,9 @@ export const EntrepreneurialProjectsSection = () => {
                 
                 {/* "En savoir plus" = Accès au site si présent */}
                 {project.link ? (
-                  <Button variant="outline" size="sm"
+                  <Button 
+                    variant="outline" 
+                    size="sm"
                     onClick={() => window.open(project.link, '_blank')}
                   >
                     En savoir plus

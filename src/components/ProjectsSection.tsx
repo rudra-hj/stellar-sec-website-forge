@@ -10,24 +10,28 @@ export const ProjectsSection = () => {
       description: "Open-source intrusion detection system built with Python and ELK stack for real-time threat detection.",
       image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=1470&ixlib=rb-4.0.3",
       tags: ["Cybersecurity", "Python", "Linux", "Open Source"],
+      link: "https://github.com/rudra/network-security-monitoring",
     },
     {
       title: "Astrophotography Collection",
       description: "High-resolution photographs of celestial objects captured using custom-built telescope and DSLR setup.",
       image: "https://images.unsplash.com/photo-1470813740244-df37b8c1edcb?auto=format&fit=crop&q=80&w=1471&ixlib=rb-4.0.3",
       tags: ["Astronomy", "Photography", "Hobby"],
+      link: "https://astro.rudra.it",
     },
     {
       title: "Linux Security Hardening Guide",
       description: "Comprehensive documentation on securing Linux systems for enterprise environments with practical examples.",
       image: "https://images.unsplash.com/photo-1482938289607-e9573fc25ebb?auto=format&fit=crop&q=80&w=1374&ixlib=rb-4.0.3",
       tags: ["Linux", "Documentation", "Security"],
+      link: "https://github.com/rudra/linux-hardening-guide",
     },
     {
       title: "Drone Imagery Analysis Tool",
       description: "Machine learning application for analyzing aerial photography from custom-modified drones.",
       image: "https://images.unsplash.com/photo-1487887235947-a955ef187fcc?auto=format&fit=crop&q=80&w=1470&ixlib=rb-4.0.3",
       tags: ["Photography", "ML", "Python"],
+      link: "https://github.com/rudra/drone-imagery-analysis",
     },
   ];
 
@@ -67,19 +71,50 @@ export const ProjectsSection = () => {
                 <CardDescription className="text-gray-300 text-base">{project.description}</CardDescription>
               </CardContent>
               <CardFooter className="flex justify-between">
-                <Button variant="ghost" className="text-primary hover:text-white hover:bg-primary">
+                <Button 
+                  variant="ghost" 
+                  className="text-primary hover:text-white hover:bg-primary"
+                  onClick={() => {
+                    // Ici, on pourrait rediriger vers une page de détail du projet
+                    // Mais puisqu'il n'y a pas de pages de détails définies pour ces projets standards
+                    // on ouvre simplement le lien externe si disponible
+                    if (project.link) {
+                      window.open(project.link, '_blank');
+                    }
+                  }}
+                >
                   View Details
                 </Button>
-                <Button variant="outline" size="sm">
-                  Case Study
-                </Button>
+                
+                {project.link ? (
+                  <Button 
+                    variant="outline" 
+                    size="sm"
+                    onClick={() => window.open(project.link, '_blank')}
+                  >
+                    Visit Project
+                  </Button>
+                ) : (
+                  <Button variant="outline" size="sm" disabled>
+                    Coming Soon
+                  </Button>
+                )}
               </CardFooter>
             </Card>
           ))}
         </div>
 
         <div className="text-center mt-12">
-          <Button variant="outline" size="lg">
+          <Button 
+            variant="outline" 
+            size="lg"
+            onClick={() => {
+              const section = document.getElementById('entrepreneurship');
+              if (section) {
+                section.scrollIntoView({ behavior: 'smooth' });
+              }
+            }}
+          >
             View All Projects
           </Button>
         </div>
