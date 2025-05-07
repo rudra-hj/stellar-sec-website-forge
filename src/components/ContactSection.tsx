@@ -1,11 +1,8 @@
-
 import { Mail, Instagram, Globe, Linkedin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-
 export const ContactSection = () => {
-  return (
-    <section id="contact" className="section-padding relative bg-cybersec-light/5">
+  return <section id="contact" className="section-padding relative bg-cybersec-light/5">
       {/* Background Effects */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute bottom-20 right-20 w-96 h-96 bg-purple-500/5 rounded-full filter blur-3xl"></div>
@@ -34,11 +31,7 @@ export const ContactSection = () => {
                     Feel free to connect with me on LinkedIn where you can see my professional experience, 
                     certifications, and get in touch directly through messaging.
                   </p>
-                  <Button 
-                    size="lg" 
-                    className="mt-4"
-                    onClick={() => window.open('https://www.linkedin.com/in/rudra-raw/', '_blank')}
-                  >
+                  <Button size="lg" className="mt-4" onClick={() => window.open('https://www.linkedin.com/in/rudra-raw/', '_blank')}>
                     <Linkedin className="mr-2 h-5 w-5" />
                     Connect on LinkedIn
                   </Button>
@@ -72,12 +65,7 @@ export const ContactSection = () => {
                     <div>
                       <h3 className="font-semibold mb-1">Instagram</h3>
                       <p className="text-sm text-gray-400">@rudra.raw</p>
-                      <a 
-                        href="https://www.instagram.com/rudra.raw/" 
-                        target="_blank" 
-                        rel="noopener noreferrer"
-                        className="text-xs text-primary hover:underline mt-1 block"
-                      >
+                      <a href="https://www.instagram.com/rudra.raw/" target="_blank" rel="noopener noreferrer" className="text-xs text-primary hover:underline mt-1 block">
                         Follow me
                       </a>
                     </div>
@@ -100,27 +88,11 @@ export const ContactSection = () => {
               </Card>
 
               <Card className="border border-cybersec-light/20 bg-cybersec-dark/60 backdrop-blur-sm hover:border-primary/50 transition-all duration-300">
-                <CardContent className="p-6">
-                  <a 
-                    href="https://www.instagram.com/rudra.raw/" 
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex flex-col items-center space-y-3"
-                  >
-                    <div className="p-3 rounded-full bg-primary/20">
-                      <Instagram className="h-6 w-6 text-primary" />
-                    </div>
-                    <div className="text-center">
-                      <h3 className="font-bold">Follow my journey</h3>
-                      <p className="text-xs text-gray-400 mt-1">@rudra.raw</p>
-                    </div>
-                  </a>
-                </CardContent>
+                
               </Card>
             </div>
           </div>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
