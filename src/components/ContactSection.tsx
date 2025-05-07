@@ -1,8 +1,6 @@
 
-import { Mail, Phone, Globe } from "lucide-react";
+import { Mail, Phone, Globe, Linkedin } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent } from "@/components/ui/card";
 
 export const ContactSection = () => {
@@ -25,55 +23,25 @@ export const ContactSection = () => {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           <div className="lg:col-span-2">
             <Card className="border border-cybersec-light/20 bg-cybersec-dark/60 backdrop-blur-sm">
-              <CardContent className="p-6">
-                <form className="space-y-6">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div className="space-y-2">
-                      <label htmlFor="name" className="text-sm font-medium">
-                        Name
-                      </label>
-                      <Input 
-                        id="name" 
-                        placeholder="Your name" 
-                        className="bg-cybersec-dark/50 border-cybersec-light/20"
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <label htmlFor="email" className="text-sm font-medium">
-                        Email
-                      </label>
-                      <Input 
-                        id="email" 
-                        type="email" 
-                        placeholder="Your email" 
-                        className="bg-cybersec-dark/50 border-cybersec-light/20"
-                      />
-                    </div>
+              <CardContent className="p-8">
+                <div className="flex flex-col items-center justify-center space-y-6">
+                  <div className="rounded-full bg-primary/10 p-6">
+                    <Linkedin className="h-16 w-16 text-primary" />
                   </div>
-                  <div className="space-y-2">
-                    <label htmlFor="subject" className="text-sm font-medium">
-                      Subject
-                    </label>
-                    <Input 
-                      id="subject" 
-                      placeholder="Subject" 
-                      className="bg-cybersec-dark/50 border-cybersec-light/20"
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <label htmlFor="message" className="text-sm font-medium">
-                      Message
-                    </label>
-                    <Textarea 
-                      id="message" 
-                      placeholder="Your message" 
-                      className="bg-cybersec-dark/50 border-cybersec-light/20 min-h-[150px]"
-                    />
-                  </div>
-                  <Button type="submit" className="w-full">
-                    Send Message
+                  <h3 className="text-2xl font-bold">Let's Connect on LinkedIn</h3>
+                  <p className="text-gray-300 text-center max-w-lg">
+                    Feel free to connect with me on LinkedIn where you can see my professional experience, 
+                    certifications, and get in touch directly through messaging.
+                  </p>
+                  <Button 
+                    size="lg" 
+                    className="mt-4"
+                    onClick={() => window.open('https://www.linkedin.com/in/rudra-profile', '_blank')}
+                  >
+                    <Linkedin className="mr-2 h-5 w-5" />
+                    Connect on LinkedIn
                   </Button>
-                </form>
+                </div>
               </CardContent>
             </Card>
           </div>
