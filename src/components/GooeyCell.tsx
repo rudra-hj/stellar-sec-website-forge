@@ -11,8 +11,8 @@ interface GooeyCellProps {
 }
 
 export const GooeyCell: React.FC<GooeyCellProps> = ({
-  color1 = "#6E59A5", // Primary color - purplish
-  color2 = "#4A69DD", // Secondary color - blueish
+  color1 = "#9b87f5", // Brighter purple color
+  color2 = "#D946EF", // Vibrant magenta color
   followMouse = true,
 }) => {
   const meshRef = useRef<THREE.Mesh>(null);
@@ -49,24 +49,24 @@ export const GooeyCell: React.FC<GooeyCellProps> = ({
       // Calculate distance from mouse position (normalized to [0,1])
       float mouseDist = distance(vUv, mousePos);
       
-      // Create a gooey blob shape
-      float radius = 0.4;
-      float edge = 0.05;
+      // Create a gooey blob shape with increased size
+      float radius = 0.5; // Increased radius
+      float edge = 0.08; // Thicker edge for more visibility
       float strength = smoothstep(radius + edge, radius - edge, dist);
       
-      // Add some mouse influence
-      float mouseInfluence = smoothstep(0.3, 0.0, mouseDist) * 0.3;
+      // Add stronger mouse influence
+      float mouseInfluence = smoothstep(0.4, 0.0, mouseDist) * 0.4; // Increased influence
       strength += mouseInfluence;
       
-      // Add some noise and time-based animation
-      float noiseValue = noise(vUv + vec2(sin(time * 0.2), cos(time * 0.2)));
-      strength += noiseValue * 0.1;
+      // Add some noise and time-based animation with more pronounced effect
+      float noiseValue = noise(vUv + vec2(sin(time * 0.3), cos(time * 0.3)));
+      strength += noiseValue * 0.15; // Increased noise contribution
       
-      // Create smooth gradient between colors
-      vec3 finalColor = mix(color1, color2, vUv.x * vUv.y + sin(time * 0.5) * 0.2);
+      // Create smooth gradient between colors with more vibrant blending
+      vec3 finalColor = mix(color1, color2, vUv.x * vUv.y + sin(time * 0.5) * 0.3);
       
-      // Apply alpha for smooth edges
-      gl_FragColor = vec4(finalColor, strength);
+      // Apply alpha for smooth edges but with higher minimum opacity
+      gl_FragColor = vec4(finalColor, max(strength, 0.1)); // Ensure some minimal visibility
     }
   `;
 
@@ -98,10 +98,10 @@ export const GooeyCell: React.FC<GooeyCellProps> = ({
       currentPosition.current.y
     );
 
-    // Add a subtle pulsing effect
+    // Add a more pronounced pulsing effect
     if (meshRef.current) {
-      meshRef.current.scale.x = 1 + Math.sin(state.clock.getElapsedTime() * 0.8) * 0.05;
-      meshRef.current.scale.y = 1 + Math.sin(state.clock.getElapsedTime() * 0.7) * 0.05;
+      meshRef.current.scale.x = 1.8 + Math.sin(state.clock.getElapsedTime() * 0.8) * 0.1;
+      meshRef.current.scale.y = 1.8 + Math.sin(state.clock.getElapsedTime() * 0.7) * 0.1;
     }
   });
 
@@ -124,7 +124,7 @@ export const GooeyCell: React.FC<GooeyCellProps> = ({
   }, [followMouse]);
 
   return (
-    <mesh ref={meshRef} scale={[1.5, 1.5, 1]}>
+    <mesh ref={meshRef} scale={[2.0, 2.0, 1]}> {/* Increased scale for larger effect */}
       <planeGeometry args={[1, 1, 32, 32]} />
       <shaderMaterial
         ref={materialRef}

@@ -40,8 +40,8 @@ export const GooeyHero: React.FC<GooeyHeroProps> = ({
 
   return (
     <section className="relative w-full min-h-screen flex items-center overflow-hidden">
-      {/* Background overlay with reduced opacity */}
-      <div className="absolute inset-0 bg-cybersec-dark/80 z-10"></div>
+      {/* Background overlay with reduced opacity for better gooey visibility */}
+      <div className="absolute inset-0 bg-cybersec-dark/70 z-10"></div>
       
       {/* Gooey Cell Canvas */}
       {mounted && (

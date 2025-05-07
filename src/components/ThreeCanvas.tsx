@@ -36,19 +36,19 @@ const ThreeCanvas: React.FC<ThreeCanvasProps> = ({ className }) => {
     // Clear canvas
     ctx.clearRect(0, 0, width, height);
     
-    // Create a static gradient as fallback
+    // Create a more vibrant gradient as fallback
     const gradient = ctx.createRadialGradient(
       width / 2, height / 2, 0,
-      width / 2, height / 2, width * 0.3
+      width / 2, height / 2, width * 0.4
     );
     
-    gradient.addColorStop(0, '#6E59A5');
-    gradient.addColorStop(1, '#4A69DD');
+    gradient.addColorStop(0, '#9b87f5');  // Brighter purple
+    gradient.addColorStop(1, '#D946EF');  // Vibrant magenta
     
-    // Draw a circle with the gradient
+    // Draw a larger circle with the gradient
     ctx.fillStyle = gradient;
     ctx.beginPath();
-    ctx.arc(width / 2, height / 2, width * 0.2, 0, Math.PI * 2);
+    ctx.arc(width / 2, height / 2, width * 0.3, 0, Math.PI * 2);
     ctx.fill();
   };
   
