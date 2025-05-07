@@ -1,7 +1,8 @@
 
 import { useState } from "react";
-import { Menu, X, Shield, Link as LinkIcon } from "lucide-react";
+import { Menu, X, Shield, Linkedin, Github } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 
 export const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -21,16 +22,29 @@ export const Navbar = () => {
           <a href="#services" className="hover:text-primary transition-colors">Services</a>
           <a href="#projects" className="hover:text-primary transition-colors">Projects</a>
           <a href="#contact" className="hover:text-primary transition-colors">Contact</a>
-          {/* Lien Linkstack */}
-          <a
-            href="https://links.rudra.it/@rudra"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-1 hover:text-primary transition-colors"
-            title="Linkstack"
-          >
-            <LinkIcon className="h-4 w-4" /> Liens
-          </a>
+          
+          {/* Social Links */}
+          <div className="flex items-center space-x-2">
+            <a
+              href="https://linkedin.com/in/rudra-profile"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-2 hover:text-primary transition-colors"
+              aria-label="LinkedIn"
+            >
+              <Linkedin className="h-5 w-5" />
+            </a>
+            <a
+              href="https://github.com/rudra"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-2 hover:text-primary transition-colors"
+              aria-label="GitHub"
+            >
+              <Github className="h-5 w-5" />
+            </a>
+          </div>
+          
           <Button variant="default">Get Started</Button>
         </div>
 
@@ -51,17 +65,31 @@ export const Navbar = () => {
             <a href="#services" onClick={() => setIsMenuOpen(false)} className="py-2 hover:text-primary transition-colors">Services</a>
             <a href="#projects" onClick={() => setIsMenuOpen(false)} className="py-2 hover:text-primary transition-colors">Projects</a>
             <a href="#contact" onClick={() => setIsMenuOpen(false)} className="py-2 hover:text-primary transition-colors">Contact</a>
-            {/* Lien Linkstack mobile */}
-            <a
-              href="https://links.rudra.it/@rudra"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-1 py-2 hover:text-primary transition-colors"
-              title="Linkstack"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              <LinkIcon className="h-4 w-4" /> Liens
-            </a>
+            
+            {/* Social Links Mobile */}
+            <div className="flex items-center space-x-4 py-2">
+              <a
+                href="https://linkedin.com/in/rudra-profile"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-primary transition-colors"
+                aria-label="LinkedIn"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                <Linkedin className="h-5 w-5" />
+              </a>
+              <a
+                href="https://github.com/rudra"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-primary transition-colors"
+                aria-label="GitHub"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                <Github className="h-5 w-5" />
+              </a>
+            </div>
+            
             <Button variant="default" onClick={() => setIsMenuOpen(false)} className="w-full">Get Started</Button>
           </div>
         </div>
