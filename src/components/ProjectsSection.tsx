@@ -9,8 +9,13 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
+import { ArrowLeft, ArrowRight } from "lucide-react";
+import { useEffect, useState } from "react";
 
 export const ProjectsSection = () => {
+  const [autoplay, setAutoplay] = useState(true);
+  const [api, setApi] = useState<any>();
+  
   const projects = [
     {
       title: "Network Security Monitoring System",
@@ -42,8 +47,19 @@ export const ProjectsSection = () => {
     },
   ];
 
+  // Auto-scroll functionality
+  useEffect(() => {
+    if (!api || !autoplay) return;
+    
+    const interval = setInterval(() => {
+      api.scrollNext();
+    }, 10000);
+    
+    return () => clearInterval(interval);
+  }, [api, autoplay]);
+
   return (
-    <section id="projects" className="section-padding bg-cybersec-dark">
+    <section id="projects" className="section-padding bg-cybersec-dark relative">
       <div className="container mx-auto px-4">
         <div className="max-w-3xl mx-auto text-center mb-16">
           <h2 className="text-3xl font-bold mb-4">Featured Projects</h2>
@@ -54,67 +70,86 @@ export const ProjectsSection = () => {
           </p>
         </div>
 
-        <Carousel className="w-full max-w-5xl mx-auto">
-          <CarouselContent>
-            {projects.map((project, index) => (
-              <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
-                <Card className="h-full overflow-hidden border border-cybersec-light/20 bg-cybersec-dark/60 backdrop-blur-sm card-hover">
-                  <div className="h-48 overflow-hidden">
-                    <img 
-                      src={project.image} 
-                      alt={project.title} 
-                      className="w-full h-full object-cover transition-transform duration-700 hover:scale-110"
-                    />
+        <div className="relative max-w-5xl mx-auto">
+          <Carousel setApi={setApi} className="w-full" opts={{ loop: true }}>
+            <CarouselContent>
+              {projects.map((project, index) => (
+                <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3 pl-4">
+                  <div className="h-full">
+                    <Card className="h-full flex flex-col overflow-hidden border border-cybersec-light/20 bg-cybersec-dark/60 backdrop-blur-sm card-hover">
+                      <div className="h-48 overflow-hidden">
+                        <img 
+                          src={project.image} 
+                          alt={project.title} 
+                          className="w-full h-full object-cover transition-transform duration-700 hover:scale-110"
+                        />
+                      </div>
+                      <CardHeader className="flex-none">
+                        <CardTitle className="text-xl">{project.title}</CardTitle>
+                        <div className="flex flex-wrap gap-2 mt-2">
+                          {project.tags.map((tag, idx) => (
+                            <Badge key={idx} variant="outline" className="bg-primary/10 text-primary border-primary/20">
+                              {tag}
+                            </Badge>
+                          ))}
+                        </div>
+                      </CardHeader>
+                      <CardContent className="flex-grow">
+                        <CardDescription className="text-gray-300 text-base">{project.description}</CardDescription>
+                      </CardContent>
+                      <CardFooter className="flex justify-between mt-auto">
+                        <Button 
+                          variant="ghost" 
+                          className="text-primary hover:text-white hover:bg-primary"
+                          onClick={() => {
+                            if (project.link) {
+                              window.open(project.link, '_blank');
+                            }
+                          }}
+                        >
+                          View Details
+                        </Button>
+                        
+                        {project.link ? (
+                          <Button 
+                            variant="outline" 
+                            size="sm"
+                            onClick={() => window.open(project.link, '_blank')}
+                          >
+                            Visit Project
+                          </Button>
+                        ) : (
+                          <Button variant="outline" size="sm" disabled>
+                            Coming Soon
+                          </Button>
+                        )}
+                      </CardFooter>
+                    </Card>
                   </div>
-                  <CardHeader>
-                    <CardTitle className="text-xl">{project.title}</CardTitle>
-                    <div className="flex flex-wrap gap-2 mt-2">
-                      {project.tags.map((tag, idx) => (
-                        <Badge key={idx} variant="outline" className="bg-primary/10 text-primary border-primary/20">
-                          {tag}
-                        </Badge>
-                      ))}
-                    </div>
-                  </CardHeader>
-                  <CardContent>
-                    <CardDescription className="text-gray-300 text-base">{project.description}</CardDescription>
-                  </CardContent>
-                  <CardFooter className="flex justify-between">
-                    <Button 
-                      variant="ghost" 
-                      className="text-primary hover:text-white hover:bg-primary"
-                      onClick={() => {
-                        if (project.link) {
-                          window.open(project.link, '_blank');
-                        }
-                      }}
-                    >
-                      View Details
-                    </Button>
-                    
-                    {project.link ? (
-                      <Button 
-                        variant="outline" 
-                        size="sm"
-                        onClick={() => window.open(project.link, '_blank')}
-                      >
-                        Visit Project
-                      </Button>
-                    ) : (
-                      <Button variant="outline" size="sm" disabled>
-                        Coming Soon
-                      </Button>
-                    )}
-                  </CardFooter>
-                </Card>
-              </CarouselItem>
-            ))}
-          </CarouselContent>
-          <div className="flex items-center justify-center gap-4 mt-8">
-            <CarouselPrevious className="relative left-0 right-auto translate-y-0" />
-            <CarouselNext className="relative right-0 left-auto translate-y-0" />
-          </div>
-        </Carousel>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            
+            {/* Side arrows for easier sliding */}
+            <CarouselPrevious className="absolute -left-12 top-1/2 h-10 w-10" />
+            <CarouselNext className="absolute -right-12 top-1/2 h-10 w-10" />
+            
+            {/* Navigation dots */}
+            <div className="flex items-center justify-center gap-2 mt-8">
+              {projects.map((_, index) => (
+                <Button
+                  key={index}
+                  variant="outline"
+                  size="icon"
+                  className={`h-2 w-2 rounded-full p-0 ${
+                    api?.selectedScrollSnap() === index ? "bg-primary" : "bg-gray-500/50"
+                  }`}
+                  onClick={() => api?.scrollTo(index)}
+                />
+              ))}
+            </div>
+          </Carousel>
+        </div>
 
         <div className="text-center mt-12">
           <Button 
