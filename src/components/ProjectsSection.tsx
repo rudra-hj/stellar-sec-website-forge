@@ -1,3 +1,4 @@
+
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -68,14 +69,14 @@ export const ProjectsSection = () => {
           </p>
         </div>
 
-        {/* Carousel with improved side arrows for easier navigation */}
-        <div className="relative max-w-5xl mx-auto">
+        {/* Carousel with side arrows directly next to the cards */}
+        <div className="relative max-w-5xl mx-auto px-2">
           <Carousel setApi={setApi} className="w-full" opts={{ loop: true }}>
-            {/* Left arrow for easier sliding */}
+            {/* Left arrow positioned closer to the cards */}
             <Button 
               variant="outline" 
               size="icon" 
-              className="absolute left-0 top-1/2 -translate-y-1/2 z-10 rounded-full bg-cybersec-dark/80 border-cybersec-light/30 hover:bg-primary/80"
+              className="absolute -left-4 top-1/2 -translate-y-1/2 z-10 rounded-full bg-cybersec-dark/80 border-cybersec-light/30 hover:bg-primary/80"
               onClick={() => api?.scrollPrev()}
             >
               <ArrowLeft className="h-6 w-6" />
@@ -141,11 +142,11 @@ export const ProjectsSection = () => {
               ))}
             </CarouselContent>
             
-            {/* Right arrow for easier sliding */}
+            {/* Right arrow positioned closer to the cards */}
             <Button 
               variant="outline" 
               size="icon" 
-              className="absolute right-0 top-1/2 -translate-y-1/2 z-10 rounded-full bg-cybersec-dark/80 border-cybersec-light/30 hover:bg-primary/80"
+              className="absolute -right-4 top-1/2 -translate-y-1/2 z-10 rounded-full bg-cybersec-dark/80 border-cybersec-light/30 hover:bg-primary/80"
               onClick={() => api?.scrollNext()}
             >
               <ArrowRight className="h-6 w-6" />
@@ -153,7 +154,7 @@ export const ProjectsSection = () => {
             </Button>
           </Carousel>
           
-          {/* Navigation dots at the bottom */}
+          {/* Navigation dots at the bottom - removed pause button */}
           <div className="flex items-center justify-center gap-2 mt-8">
             {projects.map((_, index) => (
               <Button
