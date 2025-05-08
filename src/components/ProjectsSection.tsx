@@ -13,7 +13,6 @@ import { ArrowLeft, ArrowRight } from "lucide-react";
 import { useEffect, useState } from "react";
 
 export const ProjectsSection = () => {
-  const [autoplay, setAutoplay] = useState(true);
   const [api, setApi] = useState<any>();
   
   const projects = [
@@ -49,14 +48,14 @@ export const ProjectsSection = () => {
 
   // Auto-scroll functionality
   useEffect(() => {
-    if (!api || !autoplay) return;
+    if (!api) return;
     
     const interval = setInterval(() => {
       api.scrollNext();
     }, 10000);
     
     return () => clearInterval(interval);
-  }, [api, autoplay]);
+  }, [api]);
 
   return (
     <section id="projects" className="section-padding bg-cybersec-dark relative">
@@ -70,71 +69,69 @@ export const ProjectsSection = () => {
           </p>
         </div>
 
-        <div className="relative max-w-5xl mx-auto">
+        <div className="relative max-w-5xl mx-auto px-10">
           <Carousel setApi={setApi} className="w-full" opts={{ loop: true }}>
             <CarouselContent>
               {projects.map((project, index) => (
-                <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3 pl-4">
-                  <div className="h-full">
-                    <Card className="h-full flex flex-col overflow-hidden border border-cybersec-light/20 bg-cybersec-dark/60 backdrop-blur-sm card-hover">
-                      <div className="h-48 overflow-hidden">
-                        <img 
-                          src={project.image} 
-                          alt={project.title} 
-                          className="w-full h-full object-cover transition-transform duration-700 hover:scale-110"
-                        />
+                <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
+                  <Card className="h-full flex flex-col overflow-hidden border border-cybersec-light/20 bg-cybersec-dark/60 backdrop-blur-sm card-hover mx-2">
+                    <div className="h-48 overflow-hidden">
+                      <img 
+                        src={project.image} 
+                        alt={project.title} 
+                        className="w-full h-full object-cover transition-transform duration-700 hover:scale-110"
+                      />
+                    </div>
+                    <CardHeader className="flex-none">
+                      <CardTitle className="text-xl">{project.title}</CardTitle>
+                      <div className="flex flex-wrap gap-2 mt-2">
+                        {project.tags.map((tag, idx) => (
+                          <Badge key={idx} variant="outline" className="bg-primary/10 text-primary border-primary/20">
+                            {tag}
+                          </Badge>
+                        ))}
                       </div>
-                      <CardHeader className="flex-none">
-                        <CardTitle className="text-xl">{project.title}</CardTitle>
-                        <div className="flex flex-wrap gap-2 mt-2">
-                          {project.tags.map((tag, idx) => (
-                            <Badge key={idx} variant="outline" className="bg-primary/10 text-primary border-primary/20">
-                              {tag}
-                            </Badge>
-                          ))}
-                        </div>
-                      </CardHeader>
-                      <CardContent className="flex-grow">
-                        <CardDescription className="text-gray-300 text-base">{project.description}</CardDescription>
-                      </CardContent>
-                      <CardFooter className="flex justify-between mt-auto">
+                    </CardHeader>
+                    <CardContent className="flex-grow">
+                      <CardDescription className="text-gray-300 text-base">{project.description}</CardDescription>
+                    </CardContent>
+                    <CardFooter className="flex justify-between mt-auto border-t border-cybersec-light/10 pt-4">
+                      <Button 
+                        variant="ghost" 
+                        className="text-primary hover:text-white hover:bg-primary"
+                        onClick={() => {
+                          if (project.link) {
+                            window.open(project.link, '_blank');
+                          }
+                        }}
+                      >
+                        View Details
+                      </Button>
+                      
+                      {project.link ? (
                         <Button 
-                          variant="ghost" 
-                          className="text-primary hover:text-white hover:bg-primary"
-                          onClick={() => {
-                            if (project.link) {
-                              window.open(project.link, '_blank');
-                            }
-                          }}
+                          variant="outline" 
+                          size="sm"
+                          onClick={() => window.open(project.link, '_blank')}
                         >
-                          View Details
+                          Visit Project
                         </Button>
-                        
-                        {project.link ? (
-                          <Button 
-                            variant="outline" 
-                            size="sm"
-                            onClick={() => window.open(project.link, '_blank')}
-                          >
-                            Visit Project
-                          </Button>
-                        ) : (
-                          <Button variant="outline" size="sm" disabled>
-                            Coming Soon
-                          </Button>
-                        )}
-                      </CardFooter>
-                    </Card>
-                  </div>
+                      ) : (
+                        <Button variant="outline" size="sm" disabled>
+                          Coming Soon
+                        </Button>
+                      )}
+                    </CardFooter>
+                  </Card>
                 </CarouselItem>
               ))}
             </CarouselContent>
             
             {/* Side arrows for easier sliding */}
-            <CarouselPrevious className="absolute -left-12 top-1/2 h-10 w-10" />
-            <CarouselNext className="absolute -right-12 top-1/2 h-10 w-10" />
+            <CarouselPrevious className="absolute -left-4 top-1/2 -translate-y-1/2 h-10 w-10" />
+            <CarouselNext className="absolute -right-4 top-1/2 -translate-y-1/2 h-10 w-10" />
             
-            {/* Navigation dots */}
+            {/* Navigation dots at the bottom */}
             <div className="flex items-center justify-center gap-2 mt-8">
               {projects.map((_, index) => (
                 <Button
