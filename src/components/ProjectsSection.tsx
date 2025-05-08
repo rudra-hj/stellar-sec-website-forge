@@ -1,4 +1,3 @@
-
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -10,6 +9,7 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import { useEffect, useState } from "react";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 
 export const ProjectsSection = () => {
   const [api, setApi] = useState<any>();
@@ -68,14 +68,20 @@ export const ProjectsSection = () => {
           </p>
         </div>
 
-        {/* Carousel with side arrows and uniform card sizes */}
-        <div className="relative max-w-5xl mx-auto px-12 md:px-16">
-          {/* Side arrows positioned absolutely for easier access */}
-          <div className="absolute left-0 top-1/2 -translate-y-1/2 z-10">
-            <CarouselPrevious className="h-10 w-10 relative inset-0 translate-y-0" />
-          </div>
-          
+        {/* Carousel with improved side arrows for easier navigation */}
+        <div className="relative max-w-5xl mx-auto">
           <Carousel setApi={setApi} className="w-full" opts={{ loop: true }}>
+            {/* Left arrow for easier sliding */}
+            <Button 
+              variant="outline" 
+              size="icon" 
+              className="absolute left-0 top-1/2 -translate-y-1/2 z-10 rounded-full bg-cybersec-dark/80 border-cybersec-light/30 hover:bg-primary/80"
+              onClick={() => api?.scrollPrev()}
+            >
+              <ArrowLeft className="h-6 w-6" />
+              <span className="sr-only">Previous slide</span>
+            </Button>
+            
             <CarouselContent>
               {projects.map((project, index) => (
                 <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
@@ -134,12 +140,18 @@ export const ProjectsSection = () => {
                 </CarouselItem>
               ))}
             </CarouselContent>
+            
+            {/* Right arrow for easier sliding */}
+            <Button 
+              variant="outline" 
+              size="icon" 
+              className="absolute right-0 top-1/2 -translate-y-1/2 z-10 rounded-full bg-cybersec-dark/80 border-cybersec-light/30 hover:bg-primary/80"
+              onClick={() => api?.scrollNext()}
+            >
+              <ArrowRight className="h-6 w-6" />
+              <span className="sr-only">Next slide</span>
+            </Button>
           </Carousel>
-          
-          {/* Side arrow for next positioned absolutely */}
-          <div className="absolute right-0 top-1/2 -translate-y-1/2 z-10">
-            <CarouselNext className="h-10 w-10 relative inset-0 translate-y-0" />
-          </div>
           
           {/* Navigation dots at the bottom */}
           <div className="flex items-center justify-center gap-2 mt-8">
