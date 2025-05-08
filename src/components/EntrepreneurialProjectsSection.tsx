@@ -27,7 +27,7 @@ export const EntrepreneurialProjectsSection = () => {
           <h2 className="text-3xl font-bold mb-4">Mes Projets & Idées Entrepreneuriales</h2>
           <div className="h-1 w-20 bg-primary mx-auto mb-6"></div>
           <p className="text-lg text-gray-300">
-            Découvrez mon parcours d'entrepreneur digital, des projets lancés aux idées en gestation.
+            Découvrez mon parcours d'entrepreneur, des projets lancés aux idées en gestation.
           </p>
         </div>
 

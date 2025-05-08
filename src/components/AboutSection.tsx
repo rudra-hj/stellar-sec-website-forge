@@ -82,7 +82,7 @@ export const AboutSection = () => {
           <div className="order-1 lg:order-2 relative">
             <div className="aspect-square relative z-10 rounded-2xl overflow-hidden border-2 border-primary/30 shadow-xl shadow-primary/20 w-3/4 mx-auto">
               <img 
-                src="/rudra.png"
+                src="images/rudra.png"
                 alt="Rudra - Portrait personnel" 
                 className="w-full h-full object-cover"
               />
