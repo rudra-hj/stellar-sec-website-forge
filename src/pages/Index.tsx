@@ -1,4 +1,19 @@
 
+/**
+ * Page d'accueil du site
+ * 
+ * Cette page rassemble les différentes sections du site dans l'ordre d'affichage.
+ * La structure comprend :
+ * - Une barre de navigation (Navbar)
+ * - Une section héro (HeroSection)
+ * - Une section de liens rapides (LinkstackSection)
+ * - Une section à propos (AboutSection)
+ * - Une section de projets entrepreneuriaux (EntrepreneurialProjectsSection)
+ * - Une section de flux de blog (BlogFeedSection)
+ * - Une section de contact (ContactSection)
+ * - Un pied de page (Footer)
+ */
+
 import { Navbar } from "@/components/Navbar";
 import { HeroSection } from "@/components/HeroSection";
 import { AboutSection } from "@/components/AboutSection";
@@ -13,7 +28,7 @@ const Index = () => {
     <div className="min-h-screen bg-cybersec-dark text-white">
       <Navbar />
       <HeroSection />
-      {/* Section liens Linkstack */}
+      {/* Section de liens rapides */}
       <LinkstackSection />
       <AboutSection />
       <EntrepreneurialProjectsSection />

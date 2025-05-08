@@ -1,4 +1,14 @@
 
+/**
+ * Section d'affichage des projets entrepreneuriaux
+ * 
+ * Ce composant:
+ * - Affiche une grille de cartes pour chaque projet entrepreneurial
+ * - Permet la navigation vers la page détaillée de chaque projet
+ * - Permet l'ouverture des liens externes vers les sites des projets
+ * - Affiche les tags et descriptions courtes de chaque projet
+ */
+
 import React from "react";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
@@ -12,6 +22,7 @@ export const EntrepreneurialProjectsSection = () => {
   return (
     <section id="entrepreneurship" className="section-padding bg-cybersec-dark">
       <div className="container mx-auto px-4">
+        {/* En-tête de la section */}
         <div className="max-w-3xl mx-auto text-center mb-16">
           <h2 className="text-3xl font-bold mb-4">Mes Projets & Idées Entrepreneuriales</h2>
           <div className="h-1 w-20 bg-primary mx-auto mb-6"></div>
@@ -20,9 +31,11 @@ export const EntrepreneurialProjectsSection = () => {
           </p>
         </div>
 
+        {/* Grille de projets */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {projects.map((project, index) => (
             <Card key={index} className="overflow-hidden border border-cybersec-light/20 bg-cybersec-dark/60 backdrop-blur-sm card-hover">
+              {/* Image du projet avec lien vers détails */}
               <div 
                 className="h-48 overflow-hidden cursor-pointer" 
                 onClick={() => navigate(`/project/${index}`)}
@@ -33,6 +46,8 @@ export const EntrepreneurialProjectsSection = () => {
                   className="w-full h-full object-cover transition-transform duration-700 hover:scale-110"
                 />
               </div>
+              
+              {/* En-tête de la carte avec titre et tags */}
               <CardHeader>
                 <CardTitle 
                   className="text-xl cursor-pointer hover:text-primary transition-colors"
@@ -48,11 +63,15 @@ export const EntrepreneurialProjectsSection = () => {
                   ))}
                 </div>
               </CardHeader>
+              
+              {/* Contenu de la carte avec description */}
               <CardContent>
                 <CardDescription className="text-gray-300 text-base">{project.description}</CardDescription>
               </CardContent>
+              
+              {/* Actions de la carte */}
               <CardFooter className="flex justify-between">
-                {/* "Voir le projet" = Ouvre le site externe du projet */}
+                {/* "Voir le projet" = Ouvre le site externe du projet ou les détails si pas de lien */}
                 <Button 
                   variant="ghost" 
                   className="text-primary hover:text-white hover:bg-primary"
@@ -60,7 +79,6 @@ export const EntrepreneurialProjectsSection = () => {
                     if (project.link) {
                       window.open(project.link, '_blank');
                     } else {
-                      // Si pas de lien externe, on peut rediriger vers la page détaillée
                       navigate(`/project/${index}`);
                     }
                   }}
