@@ -4,12 +4,13 @@ import { useParams, Link, useNavigate } from "react-router-dom";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { Button } from "@/components/ui/button";
-import { projects } from "@/components/EntrepreneurialProjectsSection";
 import { ArrowLeft } from "lucide-react";
+import { projects } from "@/data/projects";
+import { EntrepreneurialProject } from "@/types/project";
 
 const ProjectDetail = () => {
   const { projectId } = useParams();
-  const [project, setProject] = useState(projects[0]);
+  const [project, setProject] = useState<EntrepreneurialProject | null>(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -58,23 +59,21 @@ const ProjectDetail = () => {
             
             {/* Contenu détaillé de l'article */}
             <h2 className="text-2xl font-semibold mt-8 mb-4">À propos de ce projet</h2>
-            <p>
-              Ce projet est une initiative qui vise à répondre à un besoin spécifique identifié dans le marché.
-              Nous avons développé cette solution en utilisant les technologies les plus modernes et en suivant
-              une approche centrée sur l'utilisateur.
-            </p>
+            <p>{project.content?.about || 'Informations à venir.'}</p>
             
-            <h2 className="text-2xl font-semibold mt-8 mb-4">Challenges rencontrés</h2>
-            <p>
-              Au cours du développement de ce projet, nous avons dû surmonter plusieurs défis techniques et logistiques.
-              Chaque obstacle a été une opportunité d'apprentissage et d'innovation.
-            </p>
+            {project.content?.challenges && (
+              <>
+                <h2 className="text-2xl font-semibold mt-8 mb-4">Challenges rencontrés</h2>
+                <p>{project.content.challenges}</p>
+              </>
+            )}
             
-            <h2 className="text-2xl font-semibold mt-8 mb-4">Impact et résultats</h2>
-            <p>
-              Depuis son lancement, ce projet a connu un succès considérable et a eu un impact significatif
-              sur notre activité ainsi que sur celle de nos clients et partenaires.
-            </p>
+            {project.content?.impact && (
+              <>
+                <h2 className="text-2xl font-semibold mt-8 mb-4">Impact et résultats</h2>
+                <p>{project.content.impact}</p>
+              </>
+            )}
             
             {project.link && (
               <div className="mt-12 mb-8">
@@ -84,10 +83,9 @@ const ProjectDetail = () => {
               </div>
             )}
 
-            {/* Nouveau bouton pour revenir à l'accueil */}
             <div className="mt-12 mb-8 text-center">
               <Button variant="outline" onClick={() => navigate("/")}>
-                Retour à l’accueil
+                Retour à l'accueil
               </Button>
             </div>
             
@@ -100,4 +98,3 @@ const ProjectDetail = () => {
 };
 
 export default ProjectDetail;
-

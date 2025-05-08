@@ -25,7 +25,7 @@ export const HeroSection = () => {
               <span className="text-sm font-medium text-primary">Ingénieur Système spécialisé Linux & Open Source</span>
             </div>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
-              Bonjour, je suis <span className="tech-gradient">Rudra</span><br />
+              Hello, je suis <span className="tech-gradient">Rudra</span><br />
               Expert en technologies open source et Linux
             </h1>
             <p className="text-lg text-gray-300 max-w-lg">
