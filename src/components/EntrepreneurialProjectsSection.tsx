@@ -1,16 +1,5 @@
 
-/**
- * Section d'affichage des projets entrepreneuriaux
- * 
- * Ce composant:
- * - Affiche un carrousel de cartes pour chaque projet entrepreneurial
- * - Permet la navigation vers la page détaillée de chaque projet
- * - Permet l'ouverture des liens externes vers les sites des projets
- * - Affiche les tags et descriptions courtes de chaque projet
- * - Inclut une navigation automatique et des indicateurs de position
- */
-
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -23,8 +12,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import { ChevronLeft, ChevronRight, Pause, Play } from "lucide-react";
-import { useCallback } from "react";
+import { Pause, Play } from "lucide-react";
 import useEmblaCarousel from "embla-carousel-react";
 
 export const EntrepreneurialProjectsSection = () => {
@@ -158,50 +146,48 @@ export const EntrepreneurialProjectsSection = () => {
             </div>
           </div>
           
-          {/* Contrôles du carrousel optimisés */}
+          {/* Contrôles du carrousel en utilisant correctement les composants Carousel */}
           <div className="flex items-center justify-center mt-8">
-            <div className="flex items-center gap-4">
-              <CarouselPrevious 
-                onClick={() => emblaApi?.scrollPrev()} 
-                className="relative inset-0 translate-y-0 h-9 w-9 bg-cybersec-dark/80 border-cybersec-light/30 hover:bg-primary/80"
-              >
-                <ChevronLeft className="h-4 w-4" />
-              </CarouselPrevious>
-              
-              {/* Indicateurs de position du carrousel */}
-              <div className="flex items-center gap-2">
-                {projects.map((_, index) => (
-                  <button
-                    key={index}
-                    onClick={() => scrollTo(index)}
-                    className={`w-2.5 h-2.5 rounded-full transition-all ${
-                      currentSlide === index 
-                      ? "bg-primary w-4" 
-                      : "bg-gray-500/50 hover:bg-gray-400/60"
-                    }`}
-                    aria-label={`Aller au projet ${index + 1}`}
-                  />
-                ))}
+            <Carousel>
+              <div className="flex items-center gap-4">
+                <CarouselPrevious 
+                  onClick={() => emblaApi?.scrollPrev()} 
+                  className="relative inset-0 translate-y-0 h-9 w-9 bg-cybersec-dark/80 border-cybersec-light/30 hover:bg-primary/80"
+                />
+                
+                {/* Indicateurs de position du carrousel */}
+                <div className="flex items-center gap-2">
+                  {projects.map((_, index) => (
+                    <button
+                      key={index}
+                      onClick={() => scrollTo(index)}
+                      className={`w-2.5 h-2.5 rounded-full transition-all ${
+                        currentSlide === index 
+                        ? "bg-primary w-4" 
+                        : "bg-gray-500/50 hover:bg-gray-400/60"
+                      }`}
+                      aria-label={`Aller au projet ${index + 1}`}
+                    />
+                  ))}
+                </div>
+                
+                <CarouselNext 
+                  onClick={() => emblaApi?.scrollNext()} 
+                  className="relative inset-0 translate-y-0 h-9 w-9 bg-cybersec-dark/80 border-cybersec-light/30 hover:bg-primary/80"
+                />
+                
+                {/* Bouton Lecture/Pause */}
+                <Button
+                  variant="outline"
+                  size="icon"
+                  className="h-9 w-9 rounded-full bg-cybersec-dark/80 border-cybersec-light/30 hover:bg-primary/80"
+                  onClick={() => setAutoplay(!autoplay)}
+                  title={autoplay ? "Mettre en pause" : "Lecture automatique"}
+                >
+                  {autoplay ? <Pause className="h-4 w-4" /> : <Play className="h-4 w-4" />}
+                </Button>
               </div>
-              
-              <CarouselNext 
-                onClick={() => emblaApi?.scrollNext()} 
-                className="relative inset-0 translate-y-0 h-9 w-9 bg-cybersec-dark/80 border-cybersec-light/30 hover:bg-primary/80"
-              >
-                <ChevronRight className="h-4 w-4" />
-              </CarouselNext>
-              
-              {/* Bouton Lecture/Pause */}
-              <Button
-                variant="outline"
-                size="icon"
-                className="h-9 w-9 rounded-full bg-cybersec-dark/80 border-cybersec-light/30 hover:bg-primary/80"
-                onClick={() => setAutoplay(!autoplay)}
-                title={autoplay ? "Mettre en pause" : "Lecture automatique"}
-              >
-                {autoplay ? <Pause className="h-4 w-4" /> : <Play className="h-4 w-4" />}
-              </Button>
-            </div>
+            </Carousel>
           </div>
         </div>
       </div>

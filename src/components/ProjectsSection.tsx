@@ -2,6 +2,13 @@
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { 
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
 
 export const ProjectsSection = () => {
   const projects = [
@@ -47,62 +54,67 @@ export const ProjectsSection = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {projects.map((project, index) => (
-            <Card key={index} className="overflow-hidden border border-cybersec-light/20 bg-cybersec-dark/60 backdrop-blur-sm card-hover">
-              <div className="h-48 overflow-hidden">
-                <img 
-                  src={project.image} 
-                  alt={project.title} 
-                  className="w-full h-full object-cover transition-transform duration-700 hover:scale-110"
-                />
-              </div>
-              <CardHeader>
-                <CardTitle className="text-xl">{project.title}</CardTitle>
-                <div className="flex flex-wrap gap-2 mt-2">
-                  {project.tags.map((tag, idx) => (
-                    <Badge key={idx} variant="outline" className="bg-primary/10 text-primary border-primary/20">
-                      {tag}
-                    </Badge>
-                  ))}
-                </div>
-              </CardHeader>
-              <CardContent>
-                <CardDescription className="text-gray-300 text-base">{project.description}</CardDescription>
-              </CardContent>
-              <CardFooter className="flex justify-between">
-                <Button 
-                  variant="ghost" 
-                  className="text-primary hover:text-white hover:bg-primary"
-                  onClick={() => {
-                    // Ici, on pourrait rediriger vers une page de détail du projet
-                    // Mais puisqu'il n'y a pas de pages de détails définies pour ces projets standards
-                    // on ouvre simplement le lien externe si disponible
-                    if (project.link) {
-                      window.open(project.link, '_blank');
-                    }
-                  }}
-                >
-                  View Details
-                </Button>
-                
-                {project.link ? (
-                  <Button 
-                    variant="outline" 
-                    size="sm"
-                    onClick={() => window.open(project.link, '_blank')}
-                  >
-                    Visit Project
-                  </Button>
-                ) : (
-                  <Button variant="outline" size="sm" disabled>
-                    Coming Soon
-                  </Button>
-                )}
-              </CardFooter>
-            </Card>
-          ))}
-        </div>
+        <Carousel className="w-full max-w-5xl mx-auto">
+          <CarouselContent>
+            {projects.map((project, index) => (
+              <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
+                <Card className="h-full overflow-hidden border border-cybersec-light/20 bg-cybersec-dark/60 backdrop-blur-sm card-hover">
+                  <div className="h-48 overflow-hidden">
+                    <img 
+                      src={project.image} 
+                      alt={project.title} 
+                      className="w-full h-full object-cover transition-transform duration-700 hover:scale-110"
+                    />
+                  </div>
+                  <CardHeader>
+                    <CardTitle className="text-xl">{project.title}</CardTitle>
+                    <div className="flex flex-wrap gap-2 mt-2">
+                      {project.tags.map((tag, idx) => (
+                        <Badge key={idx} variant="outline" className="bg-primary/10 text-primary border-primary/20">
+                          {tag}
+                        </Badge>
+                      ))}
+                    </div>
+                  </CardHeader>
+                  <CardContent>
+                    <CardDescription className="text-gray-300 text-base">{project.description}</CardDescription>
+                  </CardContent>
+                  <CardFooter className="flex justify-between">
+                    <Button 
+                      variant="ghost" 
+                      className="text-primary hover:text-white hover:bg-primary"
+                      onClick={() => {
+                        if (project.link) {
+                          window.open(project.link, '_blank');
+                        }
+                      }}
+                    >
+                      View Details
+                    </Button>
+                    
+                    {project.link ? (
+                      <Button 
+                        variant="outline" 
+                        size="sm"
+                        onClick={() => window.open(project.link, '_blank')}
+                      >
+                        Visit Project
+                      </Button>
+                    ) : (
+                      <Button variant="outline" size="sm" disabled>
+                        Coming Soon
+                      </Button>
+                    )}
+                  </CardFooter>
+                </Card>
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+          <div className="flex items-center justify-center gap-4 mt-8">
+            <CarouselPrevious className="relative left-0 right-auto translate-y-0" />
+            <CarouselNext className="relative right-0 left-auto translate-y-0" />
+          </div>
+        </Carousel>
 
         <div className="text-center mt-12">
           <Button 
