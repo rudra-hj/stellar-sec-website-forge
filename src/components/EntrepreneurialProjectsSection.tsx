@@ -24,19 +24,16 @@ export const EntrepreneurialProjectsSection = () => {
     loop: true,
   });
 
-  // Fonction pour gérer le défilement automatique
   const autoScroll = useCallback(() => {
     if (!emblaApi || !autoplay) return;
     emblaApi.scrollNext();
   }, [emblaApi, autoplay]);
 
-  // Mettre à jour l'index actuel quand le carrousel change
   const updateCurrentSlide = useCallback(() => {
     if (!emblaApi) return;
     setCurrentSlide(emblaApi.selectedScrollSnap());
   }, [emblaApi]);
 
-  // Configuration du défilement automatique
   useEffect(() => {
     if (!emblaApi) return;
     
@@ -48,13 +45,11 @@ export const EntrepreneurialProjectsSection = () => {
     };
   }, [emblaApi, updateCurrentSlide]);
 
-  // Configurer le timer pour le défilement automatique
   useEffect(() => {
     const interval = setInterval(autoScroll, 10000);
     return () => clearInterval(interval);
   }, [autoScroll]);
 
-  // Fonction pour naviguer directement vers une diapositive
   const scrollTo = useCallback((index: number) => {
     if (!emblaApi) return;
     emblaApi.scrollTo(index);
@@ -63,7 +58,6 @@ export const EntrepreneurialProjectsSection = () => {
   return (
     <section id="entrepreneurship" className="section-padding bg-cybersec-dark">
       <div className="container mx-auto px-4">
-        {/* En-tête de la section */}
         <div className="max-w-3xl mx-auto text-center mb-16">
           <h2 className="text-3xl font-bold mb-4">Mes Projets & Idées Entrepreneuriales</h2>
           <div className="h-1 w-20 bg-primary mx-auto mb-6"></div>
@@ -72,9 +66,7 @@ export const EntrepreneurialProjectsSection = () => {
           </p>
         </div>
 
-        {/* Carrousel de projets avec navigation améliorée */}
         <div className="relative px-4 md:px-12">
-          {/* Bouton de navigation gauche */}
           <Button 
             variant="outline" 
             size="icon" 
@@ -89,8 +81,7 @@ export const EntrepreneurialProjectsSection = () => {
             <div className="embla__container flex">
               {projects.map((project, index) => (
                 <div key={index} className="embla__slide flex-[0_0_100%] min-w-0 md:flex-[0_0_50%] lg:flex-[0_0_33.33%] px-2 md:px-4">
-                  <Card className="h-full overflow-hidden border border-cybersec-light/20 bg-cybersec-dark/60 backdrop-blur-sm card-hover">
-                    {/* Image du projet avec lien vers détails */}
+                  <Card className="h-full flex flex-col overflow-hidden border border-cybersec-light/20 bg-cybersec-dark/60 backdrop-blur-sm card-hover">
                     <div 
                       className="h-48 overflow-hidden cursor-pointer" 
                       onClick={() => navigate(`/project/${index}`)}
@@ -102,7 +93,6 @@ export const EntrepreneurialProjectsSection = () => {
                       />
                     </div>
                     
-                    {/* En-tête de la carte avec titre et tags */}
                     <CardHeader>
                       <CardTitle 
                         className="text-xl cursor-pointer hover:text-primary transition-colors"
@@ -119,13 +109,11 @@ export const EntrepreneurialProjectsSection = () => {
                       </div>
                     </CardHeader>
                     
-                    {/* Contenu de la carte avec description */}
-                    <CardContent>
+                    <CardContent className="flex-1">
                       <CardDescription className="text-gray-300 text-base">{project.description}</CardDescription>
                     </CardContent>
                     
-                    {/* Actions de la carte */}
-                    <CardFooter className="flex justify-between mt-auto">
+                    <CardFooter className="mt-auto flex justify-between border-t border-cybersec-light/10 pt-4">
                       <Button 
                         variant="ghost" 
                         className="text-primary hover:text-white hover:bg-primary"
@@ -154,7 +142,6 @@ export const EntrepreneurialProjectsSection = () => {
             </div>
           </div>
 
-          {/* Bouton de navigation droite */}
           <Button 
             variant="outline" 
             size="icon" 
@@ -165,10 +152,8 @@ export const EntrepreneurialProjectsSection = () => {
             <ChevronRight className="h-6 w-6" />
           </Button>
           
-          {/* Contrôles du carrousel */}
           <div className="flex items-center justify-center mt-8">
             <div className="flex items-center gap-4">
-              {/* Indicateurs de position du carrousel */}
               <div className="flex items-center gap-2">
                 {projects.map((_, index) => (
                   <button
@@ -184,7 +169,6 @@ export const EntrepreneurialProjectsSection = () => {
                 ))}
               </div>
               
-              {/* Bouton Lecture/Pause */}
               <Button
                 variant="outline"
                 size="icon"

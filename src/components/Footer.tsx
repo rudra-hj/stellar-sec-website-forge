@@ -1,5 +1,4 @@
-
-import { Shield, Linkedin, Github, Mail } from "lucide-react";
+import { Shield, Linkedin, Gitlab, Mail } from "lucide-react";
 export const Footer = () => {
   const currentYear = new Date().getFullYear();
   return <footer className="bg-cybersec-dark border-t border-cybersec-light/10 py-[20px]">
@@ -32,13 +31,13 @@ export const Footer = () => {
               <Linkedin className="h-5 w-5" />
             </a>
             <a 
-              href="https://github.com/rudra" 
+              href="https://gitlab.com/rudra" 
               target="_blank" 
               rel="noopener noreferrer"
               className="text-gray-400 hover:text-primary transition-colors"
-              aria-label="GitHub"
+              aria-label="GitLab"
             >
-              <Github className="h-5 w-5" />
+              <Gitlab className="h-5 w-5" />
             </a>
             <a 
               href="mailto:contact@rudra.dev" 
