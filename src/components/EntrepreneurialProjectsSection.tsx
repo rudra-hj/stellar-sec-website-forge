@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState, useCallback } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
@@ -12,7 +11,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import { Pause, Play } from "lucide-react";
+import { Pause, Play, ChevronLeft, ChevronRight } from "lucide-react";
 import useEmblaCarousel from "embla-carousel-react";
 
 export const EntrepreneurialProjectsSection = () => {
@@ -75,6 +74,17 @@ export const EntrepreneurialProjectsSection = () => {
 
         {/* Carrousel de projets avec navigation améliorée */}
         <div className="relative px-4 md:px-12">
+          {/* Bouton de navigation gauche */}
+          <Button 
+            variant="outline" 
+            size="icon" 
+            className="absolute left-0 top-1/2 -translate-y-1/2 z-10 rounded-full bg-cybersec-dark/80 border-cybersec-light/30 hover:bg-primary/80 shadow-lg hover:shadow-primary/30 transition-all"
+            onClick={() => emblaApi?.scrollPrev()}
+            aria-label="Previous slide"
+          >
+            <ChevronLeft className="h-6 w-6" />
+          </Button>
+
           <div className="embla overflow-hidden" ref={emblaRef}>
             <div className="embla__container flex">
               {projects.map((project, index) => (
@@ -116,7 +126,6 @@ export const EntrepreneurialProjectsSection = () => {
                     
                     {/* Actions de la carte */}
                     <CardFooter className="flex justify-between mt-auto">
-                      {/* "Voir le projet" = Ouvre le site externe du projet ou les détails si pas de lien */}
                       <Button 
                         variant="ghost" 
                         className="text-primary hover:text-white hover:bg-primary"
@@ -131,7 +140,6 @@ export const EntrepreneurialProjectsSection = () => {
                         Voir le projet
                       </Button>
                       
-                      {/* "En savoir plus" = Afficher la page détaillée */}
                       <Button 
                         variant="outline" 
                         size="sm"
@@ -145,49 +153,48 @@ export const EntrepreneurialProjectsSection = () => {
               ))}
             </div>
           </div>
+
+          {/* Bouton de navigation droite */}
+          <Button 
+            variant="outline" 
+            size="icon" 
+            className="absolute right-0 top-1/2 -translate-y-1/2 z-10 rounded-full bg-cybersec-dark/80 border-cybersec-light/30 hover:bg-primary/80 shadow-lg hover:shadow-primary/30 transition-all"
+            onClick={() => emblaApi?.scrollNext()}
+            aria-label="Next slide"
+          >
+            <ChevronRight className="h-6 w-6" />
+          </Button>
           
-          {/* Contrôles du carrousel en utilisant correctement les composants Carousel */}
+          {/* Contrôles du carrousel */}
           <div className="flex items-center justify-center mt-8">
-            <Carousel>
-              <div className="flex items-center gap-4">
-                <CarouselPrevious 
-                  onClick={() => emblaApi?.scrollPrev()} 
-                  className="relative inset-0 translate-y-0 h-9 w-9 bg-cybersec-dark/80 border-cybersec-light/30 hover:bg-primary/80"
-                />
-                
-                {/* Indicateurs de position du carrousel */}
-                <div className="flex items-center gap-2">
-                  {projects.map((_, index) => (
-                    <button
-                      key={index}
-                      onClick={() => scrollTo(index)}
-                      className={`w-2.5 h-2.5 rounded-full transition-all ${
-                        currentSlide === index 
-                        ? "bg-primary w-4" 
-                        : "bg-gray-500/50 hover:bg-gray-400/60"
-                      }`}
-                      aria-label={`Aller au projet ${index + 1}`}
-                    />
-                  ))}
-                </div>
-                
-                <CarouselNext 
-                  onClick={() => emblaApi?.scrollNext()} 
-                  className="relative inset-0 translate-y-0 h-9 w-9 bg-cybersec-dark/80 border-cybersec-light/30 hover:bg-primary/80"
-                />
-                
-                {/* Bouton Lecture/Pause */}
-                <Button
-                  variant="outline"
-                  size="icon"
-                  className="h-9 w-9 rounded-full bg-cybersec-dark/80 border-cybersec-light/30 hover:bg-primary/80"
-                  onClick={() => setAutoplay(!autoplay)}
-                  title={autoplay ? "Mettre en pause" : "Lecture automatique"}
-                >
-                  {autoplay ? <Pause className="h-4 w-4" /> : <Play className="h-4 w-4" />}
-                </Button>
+            <div className="flex items-center gap-4">
+              {/* Indicateurs de position du carrousel */}
+              <div className="flex items-center gap-2">
+                {projects.map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => scrollTo(index)}
+                    className={`w-2.5 h-2.5 rounded-full transition-all ${
+                      currentSlide === index 
+                      ? "bg-primary w-4" 
+                      : "bg-gray-500/50 hover:bg-gray-400/60"
+                    }`}
+                    aria-label={`Aller au projet ${index + 1}`}
+                  />
+                ))}
               </div>
-            </Carousel>
+              
+              {/* Bouton Lecture/Pause */}
+              <Button
+                variant="outline"
+                size="icon"
+                className="h-9 w-9 rounded-full bg-cybersec-dark/80 border-cybersec-light/30 hover:bg-primary/80"
+                onClick={() => setAutoplay(!autoplay)}
+                title={autoplay ? "Mettre en pause" : "Lecture automatique"}
+              >
+                {autoplay ? <Pause className="h-4 w-4" /> : <Play className="h-4 w-4" />}
+              </Button>
+            </div>
           </div>
         </div>
       </div>
