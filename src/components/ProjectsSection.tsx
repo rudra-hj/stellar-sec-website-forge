@@ -69,20 +69,20 @@ export const ProjectsSection = () => {
           </p>
         </div>
 
-        {/* Carousel with side arrows directly next to the cards */}
-        <div className="relative max-w-5xl mx-auto px-2">
-          <Carousel setApi={setApi} className="w-full" opts={{ loop: true }}>
-            {/* Left arrow positioned closer to the cards */}
-            <Button 
-              variant="outline" 
-              size="icon" 
-              className="absolute -left-4 top-1/2 -translate-y-1/2 z-10 rounded-full bg-cybersec-dark/80 border-cybersec-light/30 hover:bg-primary/80"
-              onClick={() => api?.scrollPrev()}
-            >
-              <ArrowLeft className="h-6 w-6" />
-              <span className="sr-only">Previous slide</span>
-            </Button>
-            
+        {/* Main carousel container with direct navigation buttons */}
+        <div className="relative max-w-5xl mx-auto">
+          {/* Left navigation button - positioned directly beside the cards */}
+          <Button 
+            variant="outline" 
+            size="icon" 
+            className="absolute left-0 top-1/2 -translate-y-1/2 z-10 rounded-full bg-cybersec-dark/80 border-cybersec-light/30 hover:bg-primary/80"
+            onClick={() => api?.scrollPrev()}
+            aria-label="Previous slide"
+          >
+            <ArrowLeft className="h-6 w-6" />
+          </Button>
+          
+          <Carousel setApi={setApi} className="w-full px-12" opts={{ loop: true }}>
             <CarouselContent>
               {projects.map((project, index) => (
                 <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
@@ -141,20 +141,20 @@ export const ProjectsSection = () => {
                 </CarouselItem>
               ))}
             </CarouselContent>
-            
-            {/* Right arrow positioned closer to the cards */}
-            <Button 
-              variant="outline" 
-              size="icon" 
-              className="absolute -right-4 top-1/2 -translate-y-1/2 z-10 rounded-full bg-cybersec-dark/80 border-cybersec-light/30 hover:bg-primary/80"
-              onClick={() => api?.scrollNext()}
-            >
-              <ArrowRight className="h-6 w-6" />
-              <span className="sr-only">Next slide</span>
-            </Button>
           </Carousel>
           
-          {/* Navigation dots at the bottom - removed pause button */}
+          {/* Right navigation button - positioned directly beside the cards */}
+          <Button 
+            variant="outline" 
+            size="icon" 
+            className="absolute right-0 top-1/2 -translate-y-1/2 z-10 rounded-full bg-cybersec-dark/80 border-cybersec-light/30 hover:bg-primary/80"
+            onClick={() => api?.scrollNext()}
+            aria-label="Next slide"
+          >
+            <ArrowRight className="h-6 w-6" />
+          </Button>
+          
+          {/* Navigation dots at the bottom - no pause button */}
           <div className="flex items-center justify-center gap-2 mt-8">
             {projects.map((_, index) => (
               <Button
