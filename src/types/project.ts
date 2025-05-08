@@ -15,6 +15,11 @@ export type EntrepreneurialProject = {
     about: string;               // Description détaillée du projet
     challenges?: string;         // Défis rencontrés lors du développement (optionnel)
     impact?: string;             // Impact et résultats du projet (optionnel)
+    keyDates?: {                 // Dates clés du projet (optionnel)
+      date: string;              // Date au format JJ/MM/AAAA ou MM/AAAA
+      title: string;             // Titre de l'événement
+      description?: string;      // Description détaillée de l'événement (optionnel)
+    }[];
     // Possibilité d'ajouter d'autres sections au besoin
   };
 };

@@ -9,7 +9,7 @@
  *   - Navigation
  *   - Image principale
  *   - Titre et tags du projet
- *   - Contenu détaillé (à propos, défis, impact)
+ *   - Contenu détaillé (à propos, défis, impact, dates clés)
  *   - Boutons d'action (visiter le site, retour)
  *   - Pied de page
  */
@@ -48,7 +48,7 @@ const ProjectDetail = () => {
       <Navbar />
       <div className="container mx-auto px-4 py-16">
         {/* Bouton de retour à la liste des projets */}
-        <Link to="/#entrepreneurship">
+        <Link to="/?section=entrepreneurship">
           <Button variant="ghost" className="mb-6">
             <ArrowLeft size={16} className="mr-2" />
             Retour aux projets
@@ -100,6 +100,21 @@ const ProjectDetail = () => {
               </>
             )}
             
+            {/* Section "Dates clés" (si disponible) */}
+            {project.content?.keyDates && project.content.keyDates.length > 0 && (
+              <>
+                <h2 className="text-2xl font-semibold mt-8 mb-4">Dates clés</h2>
+                <div className="space-y-4">
+                  {project.content.keyDates.map((keyDate, idx) => (
+                    <div key={idx} className="border-l-2 border-primary pl-4 py-2">
+                      <h3 className="font-semibold text-lg">{keyDate.date} - {keyDate.title}</h3>
+                      {keyDate.description && <p className="text-gray-300">{keyDate.description}</p>}
+                    </div>
+                  ))}
+                </div>
+              </>
+            )}
+            
             {/* Bouton pour visiter le site du projet (si lien disponible) */}
             {project.link && (
               <div className="mt-12 mb-8">
@@ -111,7 +126,7 @@ const ProjectDetail = () => {
 
             {/* Bouton de retour à l'accueil */}
             <div className="mt-12 mb-8 text-center">
-              <Button variant="outline" onClick={() => navigate("/")}>
+              <Button variant="outline" onClick={() => navigate("/?section=entrepreneurship")}>
                 Retour à l'accueil
               </Button>
             </div>
