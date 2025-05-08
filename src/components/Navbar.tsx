@@ -57,7 +57,7 @@ export const Navbar = () => {
         <div className="hidden md:flex items-center space-x-6">
           <button onClick={() => scrollToSection('home')} className="hover:text-primary transition-colors">Home</button>
           <button onClick={() => scrollToSection('about')} className="hover:text-primary transition-colors">About</button>
-          <button onClick={() => scrollToSection('projects')} className="hover:text-primary transition-colors">Projects</button>
+          <button onClick={() => scrollToSection('entrepreneurship')} className="hover:text-primary transition-colors">Projects</button>
           <button onClick={() => scrollToSection('contact')} className="hover:text-primary transition-colors">Contact</button>
           
           {/* Social Links */}
@@ -104,7 +104,7 @@ export const Navbar = () => {
           <div className="container mx-auto px-4 py-3 flex flex-col space-y-4">
             <button onClick={() => scrollToSection('home')} className="py-2 hover:text-primary transition-colors text-left">Home</button>
             <button onClick={() => scrollToSection('about')} className="py-2 hover:text-primary transition-colors text-left">About</button>
-            <button onClick={() => scrollToSection('projects')} className="py-2 hover:text-primary transition-colors text-left">Projects</button>
+            <button onClick={() => scrollToSection('entrepreneurship')} className="py-2 hover:text-primary transition-colors text-left">Projects</button>
             <button onClick={() => scrollToSection('contact')} className="py-2 hover:text-primary transition-colors text-left">Contact</button>
             
             {/* Social Links Mobile */}
