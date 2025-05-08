@@ -10,10 +10,12 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import { useEffect, useState } from "react";
-import { ArrowLeft, ArrowRight } from "lucide-react";
+import { ArrowLeft, ArrowRight, Pause, Play } from "lucide-react";
 
 export const ProjectsSection = () => {
   const [api, setApi] = useState<any>();
+  const [autoPlay, setAutoPlay] = useState<boolean>(true);
+  const [currentIndex, setCurrentIndex] = useState(0);
   
   const projects = [
     {
@@ -46,16 +48,31 @@ export const ProjectsSection = () => {
     },
   ];
 
-  // Auto-scroll functionality
+  // Update current index when slide changes
   useEffect(() => {
     if (!api) return;
+    
+    const onSelect = () => {
+      setCurrentIndex(api.selectedScrollSnap());
+    };
+    
+    api.on('select', onSelect);
+    
+    return () => {
+      api.off('select', onSelect);
+    };
+  }, [api]);
+
+  // Auto-scroll functionality
+  useEffect(() => {
+    if (!api || !autoPlay) return;
     
     const interval = setInterval(() => {
       api.scrollNext();
     }, 10000);
     
     return () => clearInterval(interval);
-  }, [api]);
+  }, [api, autoPlay]);
 
   return (
     <section id="projects" className="section-padding bg-cybersec-dark relative">
@@ -69,13 +86,13 @@ export const ProjectsSection = () => {
           </p>
         </div>
 
-        {/* Main carousel container with direct navigation buttons */}
+        {/* Enhanced carousel container with improved navigation */}
         <div className="relative max-w-5xl mx-auto">
-          {/* Left navigation button - positioned directly beside the cards */}
+          {/* Left navigation button with improved styling */}
           <Button 
             variant="outline" 
             size="icon" 
-            className="absolute left-0 top-1/2 -translate-y-1/2 z-10 rounded-full bg-cybersec-dark/80 border-cybersec-light/30 hover:bg-primary/80"
+            className="absolute -left-4 top-1/2 -translate-y-1/2 z-10 rounded-full bg-cybersec-dark/80 border-cybersec-light/30 hover:bg-primary/80 shadow-lg hover:shadow-primary/30 transition-all"
             onClick={() => api?.scrollPrev()}
             aria-label="Previous slide"
           >
@@ -86,15 +103,18 @@ export const ProjectsSection = () => {
             <CarouselContent>
               {projects.map((project, index) => (
                 <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
-                  <div className="h-full px-2">
-                    <Card className="h-full flex flex-col border border-cybersec-light/20 bg-cybersec-dark/60 backdrop-blur-sm card-hover">
-                      {/* Fixed height image container */}
-                      <div className="h-48 overflow-hidden">
+                  <div className="h-full px-2 py-2">
+                    <Card className="h-full flex flex-col border border-cybersec-light/20 bg-cybersec-dark/60 backdrop-blur-sm hover:shadow-lg hover:shadow-primary/20 transition-all duration-300 transform hover:-translate-y-1">
+                      {/* Fixed height image container with overlay on hover */}
+                      <div className="h-48 overflow-hidden relative group">
                         <img 
                           src={project.image} 
                           alt={project.title} 
-                          className="w-full h-full object-cover transition-transform duration-700 hover:scale-110"
+                          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                         />
+                        <div className="absolute inset-0 bg-gradient-to-t from-cybersec-dark/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                          <span className="text-white text-sm font-medium">View details</span>
+                        </div>
                       </div>
                       <CardHeader className="flex-none">
                         <CardTitle className="text-xl">{project.title}</CardTitle>
@@ -126,6 +146,7 @@ export const ProjectsSection = () => {
                           <Button 
                             variant="outline" 
                             size="sm"
+                            className="hover:bg-primary hover:text-white transition-colors"
                             onClick={() => window.open(project.link, '_blank')}
                           >
                             Visit Project
@@ -143,30 +164,54 @@ export const ProjectsSection = () => {
             </CarouselContent>
           </Carousel>
           
-          {/* Right navigation button - positioned directly beside the cards */}
+          {/* Right navigation button with improved styling */}
           <Button 
             variant="outline" 
             size="icon" 
-            className="absolute right-0 top-1/2 -translate-y-1/2 z-10 rounded-full bg-cybersec-dark/80 border-cybersec-light/30 hover:bg-primary/80"
+            className="absolute -right-4 top-1/2 -translate-y-1/2 z-10 rounded-full bg-cybersec-dark/80 border-cybersec-light/30 hover:bg-primary/80 shadow-lg hover:shadow-primary/30 transition-all"
             onClick={() => api?.scrollNext()}
             aria-label="Next slide"
           >
             <ArrowRight className="h-6 w-6" />
           </Button>
           
-          {/* Navigation dots at the bottom - no pause button */}
-          <div className="flex items-center justify-center gap-2 mt-8">
-            {projects.map((_, index) => (
-              <Button
-                key={index}
-                variant="outline"
-                size="icon"
-                className={`h-2 w-2 rounded-full p-0 ${
-                  api?.selectedScrollSnap() === index ? "bg-primary" : "bg-gray-500/50"
-                }`}
-                onClick={() => api?.scrollTo(index)}
-              />
-            ))}
+          {/* Improved navigation dots and controls at the bottom */}
+          <div className="flex flex-col items-center gap-4 mt-8">
+            {/* Progress indicators with active state */}
+            <div className="flex items-center justify-center gap-2">
+              {projects.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => api?.scrollTo(index)}
+                  className={`h-2.5 rounded-full transition-all duration-300 ${
+                    currentIndex === index 
+                      ? "bg-primary w-6" 
+                      : "bg-gray-500/50 w-2.5 hover:bg-gray-400/70"
+                  }`}
+                  aria-label={`Go to slide ${index + 1}`}
+                />
+              ))}
+            </div>
+            
+            {/* Play/pause button */}
+            <Button
+              variant="outline"
+              size="sm"
+              className="mt-2 bg-cybersec-dark/60 border-cybersec-light/20 hover:bg-primary/80 transition-colors"
+              onClick={() => setAutoPlay(!autoPlay)}
+            >
+              {autoPlay ? (
+                <>
+                  <Pause className="h-4 w-4 mr-2" />
+                  Pause Slideshow
+                </>
+              ) : (
+                <>
+                  <Play className="h-4 w-4 mr-2" />
+                  Play Slideshow
+                </>
+              )}
+            </Button>
           </div>
         </div>
 
@@ -174,6 +219,7 @@ export const ProjectsSection = () => {
           <Button 
             variant="outline" 
             size="lg"
+            className="hover:bg-primary hover:text-white transition-colors"
             onClick={() => {
               const section = document.getElementById('entrepreneurship');
               if (section) {
