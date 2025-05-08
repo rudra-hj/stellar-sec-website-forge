@@ -7,7 +7,7 @@
 export type EntrepreneurialProject = {
   title: string;                 // Titre du projet
   description: string;           // Description courte du projet
-  image: string;                 // URL de l'image principale du projet
+  image: string;                 // URL de l'image principale du projet (dans public/images/projets/)
   tags: string[];                // Tags/catégories du projet (technologies, domaines...)
   link?: string;                 // Lien externe vers le site du projet (optionnel)
   articleLink?: string;          // Lien externe vers un article détaillé (optionnel)
@@ -20,6 +20,14 @@ export type EntrepreneurialProject = {
       title: string;             // Titre de l'événement
       description?: string;      // Description détaillée de l'événement (optionnel)
     }[];
-    // Possibilité d'ajouter d'autres sections au besoin
   };
 };
+
+// Fonction utilitaire pour aider à la création de nouveaux projets
+export function createProject(project: EntrepreneurialProject): EntrepreneurialProject {
+  return {
+    ...project,
+    // S'assure que l'image pointe vers le bon répertoire si ce n'est pas une URL complète
+    image: project.image.startsWith('http') ? project.image : `/images/projets/${project.image}`
+  };
+}

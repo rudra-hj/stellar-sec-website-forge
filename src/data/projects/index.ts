@@ -30,3 +30,13 @@ export const projects: EntrepreneurialProject[] = [
   pmeSecurity,
   fred
 ];
+
+/**
+ * Fonction utilitaire pour ajouter un nouveau projet à la liste
+ * Cette fonction met à jour automatiquement le tableau des projets
+ * @param project Le projet à ajouter
+ */
+export function addProject(project: EntrepreneurialProject): void {
+  console.log("Nouveau projet ajouté:", project.title);
+  projects.push(project);
+}
