@@ -11,7 +11,8 @@
         "esbenp.prettier-vscode",
         "bradlc.vscode-tailwindcss",
         "ms-vscode.vscode-typescript-next",
-        "formulahendry.auto-rename-tag"
+        "formulahendry.auto-rename-tag",
+        "skyran.js-jsx-snippets"
       ]
       // "settings": {
       //   "editor.formatOnSave": true,

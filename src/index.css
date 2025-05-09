@@ -128,3 +128,19 @@
     will-change: transform;
   }
 }
+@keyframes terminal-scroll {
+  0%   { transform: translateY(0); }
+  100% { transform: translateY(-100%); }
+}
+.animate-terminal-scroll {
+  animation: terminal-scroll 60s steps(80, end) infinite;
+}
+
+@keyframes jitter {
+  0%, 100% { transform: translate(0, 0); }
+  33%      { transform: translate(-1px, 1px); }
+  66%      { transform: translate(1px, -1px); }
+}
+.animate-jitter {
+  animation: jitter 0.15s steps(2, end) infinite;
+}

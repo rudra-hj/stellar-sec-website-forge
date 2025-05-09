@@ -22,12 +22,3 @@ export type EntrepreneurialProject = {
     }[];
   };
 };
-
-// Fonction utilitaire pour aider à la création de nouveaux projets
-export function createProject(project: EntrepreneurialProject): EntrepreneurialProject {
-  return {
-    ...project,
-    // S'assure que l'image pointe vers le bon répertoire si ce n'est pas une URL complète
-    image: project.image.startsWith('http') ? project.image : `/images/projets/${project.image}`
-  };
-}

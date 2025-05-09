@@ -1,5 +1,5 @@
 
-import { EntrepreneurialProject, createProject } from "@/types/project";
+import { EntrepreneurialProject } from "@/types/project";
 
 /**
  * Modèle de projet - Copiez ce fichier pour créer un nouveau projet
@@ -11,11 +11,11 @@ import { EntrepreneurialProject, createProject } from "@/types/project";
  * 4. Importez votre projet dans index.ts et ajoutez-le à l'export et au tableau projects
  */
 
-const projetExemple = createProject({
+const projetExemple: EntrepreneurialProject = {
   title: "Titre du Projet",
   description: "Description courte du projet qui apparaîtra sur la carte du projet dans la liste.",
   // Pour utiliser une image locale: placez le fichier dans public/images/projets/ et indiquez juste le nom du fichier
-  image: "nom-image.jpg", 
+  image: "/images/projets/nom-image.jpg", 
   // Ou pour une image externe, utilisez l'URL complète:
   // image: "https://example.com/path-to-image.jpg",
   tags: ["Tag1", "Tag2", "Tag3"],
@@ -52,6 +52,6 @@ const projetExemple = createProject({
       }
     ]
   }
-});
+};
 
 export default projetExemple;

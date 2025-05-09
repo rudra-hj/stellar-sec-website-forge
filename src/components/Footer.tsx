@@ -5,7 +5,7 @@ export const Footer = () => {
       <div className="container mx-auto px-4">
         <div className="flex flex-col md:flex-row justify-between items-center mb-8">
           <div className="flex items-center mb-6 md:mb-0">
-            <Shield className="h-8 w-8 text-primary mr-2" />
+            <img src="/logo.svg" alt="Logo" className="h-8 w-8 mr-2" />
             <span className="font-bold text-xl">Rudra</span>
           </div>
           <div className="flex flex-wrap gap-4 md:gap-8 justify-center">

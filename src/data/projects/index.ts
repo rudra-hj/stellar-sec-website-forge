@@ -9,17 +9,20 @@ import { EntrepreneurialProject } from "@/types/project";
 // Import des fichiers de données de chaque projet
 import lumina from "./lumina";
 import fred from "./Fred";
+import onemedia from "./onemedia";
 
 // Export des projets individuels pour y accéder directement
 export { 
   lumina,
-  fred
+  fred,
+  onemedia
 };
 
 // Export du tableau complet de tous les projets
 export const projects: EntrepreneurialProject[] = [
   lumina,
-  fred
+  fred,
+  onemedia,
 ];
 
 /**
