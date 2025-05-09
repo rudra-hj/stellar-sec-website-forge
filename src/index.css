@@ -112,4 +112,19 @@
   .card-hover {
     @apply transition-all duration-300 hover:shadow-lg hover:shadow-cybersec-accent/20 hover:translate-y-[-5px];
   }
+
+  /* Terminal animation */
+  @keyframes terminal-scroll {
+    0% {
+      transform: translateY(0);
+    }
+    100% {
+      transform: translateY(-50%);
+    }
+  }
+
+  .animate-terminal-scroll {
+    animation: terminal-scroll 30s linear infinite;
+    will-change: transform;
+  }
 }
