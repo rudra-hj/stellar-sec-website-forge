@@ -48,7 +48,7 @@ const ProjectDetail = () => {
       <Navbar />
       <div className="container mx-auto px-4 py-16">
         {/* Bouton de retour à la liste des projets */}
-        <Link to="/?section=entrepreneurship">
+        <Link to="/?section=Projets">
           <Button variant="ghost" className="mb-6">
             <ArrowLeft size={16} className="mr-2" />
             Retour aux projets
@@ -126,7 +126,7 @@ const ProjectDetail = () => {
 
             {/* Bouton de retour à l'accueil */}
             <div className="mt-12 mb-8 text-center">
-              <Button variant="outline" onClick={() => navigate("/?section=entrepreneurship")}>
+              <Button variant="outline" onClick={() => navigate("/?section=Projets")}>
                 Retour à l'accueil
               </Button>
             </div>

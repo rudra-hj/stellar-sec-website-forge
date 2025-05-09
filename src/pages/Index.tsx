@@ -8,7 +8,7 @@
  * - Une section héro (HeroSection)
  * - Une section de liens rapides (LinkstackSection)
  * - Une section à propos (AboutSection)
- * - Une section de projets entrepreneuriaux (EntrepreneurialProjectsSection)
+ * - Une section de projets entrepreneuriaux (ProjectsSection)
  * - Une section de flux de blog (BlogFeedSection)
  * - Une section de contact (ContactSection)
  * - Un pied de page (Footer)
@@ -20,7 +20,7 @@ import { AboutSection } from "@/components/AboutSection";
 import { BlogFeedSection } from "@/components/BlogFeedSection";
 import { ContactSection } from "@/components/ContactSection";
 import { Footer } from "@/components/Footer";
-import { EntrepreneurialProjectsSection } from "@/components/EntrepreneurialProjectsSection";
+import { ProjectsSection } from "@/components/ProjectsSection";
 import { LinkstackSection } from "@/components/LinkstackSection";
 
 const Index = () => {
@@ -31,7 +31,7 @@ const Index = () => {
       {/* Section de liens rapides */}
       <LinkstackSection />
       <AboutSection />
-      <EntrepreneurialProjectsSection />
+      <ProjectsSection />
       <BlogFeedSection feedUrl="https://luminapp.fr/blog/index.xml" maxItems={4} />
       <ContactSection />
       <Footer />

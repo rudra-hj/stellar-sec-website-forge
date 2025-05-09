@@ -6,10 +6,10 @@ export const AboutSection = () => {
     <section id="about" className="section-padding bg-cybersec-dark">
       <div className="container mx-auto px-4">
         <div className="max-w-3xl mx-auto text-center mb-16">
-          <h2 className="text-3xl font-bold mb-4">À propos de Rudra</h2>
+          <h2 className="text-3xl font-bold mb-4">À propos de moi</h2>
           <div className="h-1 w-20 bg-primary mx-auto mb-6"></div>
           <p className="text-lg text-gray-300">
-            Passionné par l'innovation technique et l'aventure, je combine des compétences diverses pour créer des solutions uniques et élégantes.
+            Passionné par la technique et toujours en quête d’aventure, j’allie savoir-faire et créativité pour imaginer des solutions uniques et élégantes.
           </p>
         </div>
 
@@ -17,7 +17,8 @@ export const AboutSection = () => {
           <div className="order-2 lg:order-1">
             <h3 className="text-2xl font-bold mb-4">Ma vision</h3>
             <p className="mb-6 text-gray-300">
-              Je suis convaincu qu'une expertise technique seule ne suffit pas. C'est pourquoi j'apporte à chaque projet un mélange unique de compétences acquises dans divers domaines de ma vie. Que ce soit la précision que j'ai développée en tant que motard ou le sens esthétique issu de ma passion pour la photographie, je cherche toujours à enrichir mon travail technique d'une dimension supplémentaire.
+            Je suis convaincu qu’une expertise technique, aussi solide soit-elle, ne suffit pas à elle seule.
+            C'est pouruqoi j’apporte à chaque projet la précision d’un motard, l’œil du photographe et la richesse de toutes mes expériences pour obtenir le meilleur résultat possible.
             </p>
 
             <h3 className="text-2xl font-bold mb-4">Ce qui me définit</h3>
@@ -28,7 +29,7 @@ export const AboutSection = () => {
                 </div>
                 <div>
                   <h4 className="font-semibold">Open Source</h4>
-                  <p className="text-sm text-gray-400">Passionné par les technologies libres</p>
+                  <p className="text-sm text-gray-400">Car la liberté n’a pas de prix</p>
                 </div>
               </div>
               <div className="flex items-start">
@@ -37,7 +38,7 @@ export const AboutSection = () => {
                 </div>
                 <div>
                   <h4 className="font-semibold">Linux</h4>
-                  <p className="text-sm text-gray-400">Expert en administration système</p>
+                  <p className="text-sm text-gray-400">Comme Obélix, je suis tombé dans la potion</p>
                 </div>
               </div>
               <div className="flex items-start">

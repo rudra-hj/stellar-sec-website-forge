@@ -1,7 +1,9 @@
-
+import React, { useEffect, useState, useCallback } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { useNavigate } from "react-router-dom";
+import { projects } from "@/data/projects";
 import { 
   Carousel,
   CarouselContent,
@@ -9,226 +11,175 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import { useEffect, useState } from "react";
-import { ArrowLeft, ArrowRight, Pause, Play } from "lucide-react";
+import { Pause, Play, ChevronLeft, ChevronRight } from "lucide-react";
+import useEmblaCarousel from "embla-carousel-react";
 
 export const ProjectsSection = () => {
-  const [api, setApi] = useState<any>();
-  const [autoPlay, setAutoPlay] = useState<boolean>(true);
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const navigate = useNavigate();
+  const [autoplay, setAutoplay] = useState(true);
+  const [currentSlide, setCurrentSlide] = useState(0);
   
-  const projects = [
-    {
-      title: "Network Security Monitoring System",
-      description: "Open-source intrusion detection system built with Python and ELK stack for real-time threat detection.",
-      image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=1470&ixlib=rb-4.0.3",
-      tags: ["Cybersecurity", "Python", "Linux", "Open Source"],
-      link: "https://github.com/rudra/network-security-monitoring",
-    },
-    {
-      title: "Astrophotography Collection",
-      description: "High-resolution photographs of celestial objects captured using custom-built telescope and DSLR setup.",
-      image: "https://images.unsplash.com/photo-1470813740244-df37b8c1edcb?auto=format&fit=crop&q=80&w=1471&ixlib=rb-4.0.3",
-      tags: ["Astronomy", "Photography", "Hobby"],
-      link: "https://astro.rudra.it",
-    },
-    {
-      title: "Linux Security Hardening Guide",
-      description: "Comprehensive documentation on securing Linux systems for enterprise environments with practical examples.",
-      image: "https://images.unsplash.com/photo-1482938289607-e9573fc25ebb?auto=format&fit=crop&q=80&w=1374&ixlib=rb-4.0.3",
-      tags: ["Linux", "Documentation", "Security"],
-      link: "https://github.com/rudra/linux-hardening-guide",
-    },
-    {
-      title: "Drone Imagery Analysis Tool",
-      description: "Machine learning application for analyzing aerial photography from custom-modified drones.",
-      image: "https://images.unsplash.com/photo-1487887235947-a955ef187fcc?auto=format&fit=crop&q=80&w=1470&ixlib=rb-4.0.3",
-      tags: ["Photography", "ML", "Python"],
-      link: "https://github.com/rudra/drone-imagery-analysis",
-    },
-  ];
+  const [emblaRef, emblaApi] = useEmblaCarousel({
+    align: "start",
+    loop: true,
+  });
 
-  // Update current index when slide changes
+  const autoScroll = useCallback(() => {
+    if (!emblaApi || !autoplay) return;
+    emblaApi.scrollNext();
+  }, [emblaApi, autoplay]);
+
+  const updateCurrentSlide = useCallback(() => {
+    if (!emblaApi) return;
+    setCurrentSlide(emblaApi.selectedScrollSnap());
+  }, [emblaApi]);
+
   useEffect(() => {
-    if (!api) return;
+    if (!emblaApi) return;
     
-    const onSelect = () => {
-      setCurrentIndex(api.selectedScrollSnap());
-    };
-    
-    api.on('select', onSelect);
-    
+    emblaApi.on('select', updateCurrentSlide);
+    updateCurrentSlide();
+
     return () => {
-      api.off('select', onSelect);
+      emblaApi.off('select', updateCurrentSlide);
     };
-  }, [api]);
+  }, [emblaApi, updateCurrentSlide]);
 
-  // Auto-scroll functionality
   useEffect(() => {
-    if (!api || !autoPlay) return;
-    
-    const interval = setInterval(() => {
-      api.scrollNext();
-    }, 10000);
-    
+    const interval = setInterval(autoScroll, 10000);
     return () => clearInterval(interval);
-  }, [api, autoPlay]);
+  }, [autoScroll]);
+
+  const scrollTo = useCallback((index: number) => {
+    if (!emblaApi) return;
+    emblaApi.scrollTo(index);
+  }, [emblaApi]);
 
   return (
-    <section id="projects" className="section-padding bg-cybersec-dark relative">
+    <section id="Projets" className="section-padding bg-cybersec-dark">
       <div className="container mx-auto px-4">
         <div className="max-w-3xl mx-auto text-center mb-16">
-          <h2 className="text-3xl font-bold mb-4">Featured Projects</h2>
+          <h2 className="text-3xl font-bold mb-4">Mes Projets & Idées Entrepreneuriales</h2>
           <div className="h-1 w-20 bg-primary mx-auto mb-6"></div>
           <p className="text-lg text-gray-300">
-            A selection of my professional work and personal projects that showcase my 
-            technical expertise and diverse interests.
+            Découvrez mon parcours d'entrepreneur, des idées en gestation aux projets lancés.
           </p>
         </div>
 
-        {/* Enhanced carousel container with improved navigation */}
-        <div className="relative max-w-5xl mx-auto">
-          {/* Left navigation button with improved styling */}
+        <div className="relative px-4 md:px-12">
           <Button 
             variant="outline" 
             size="icon" 
-            className="absolute -left-4 top-1/2 -translate-y-1/2 z-10 rounded-full bg-cybersec-dark/80 border-cybersec-light/30 hover:bg-primary/80 shadow-lg hover:shadow-primary/30 transition-all"
-            onClick={() => api?.scrollPrev()}
+            className="absolute left-0 top-1/2 -translate-y-1/2 z-10 rounded-full bg-cybersec-dark/80 border-cybersec-light/30 hover:bg-primary/80 shadow-lg hover:shadow-primary/30 transition-all"
+            onClick={() => emblaApi?.scrollPrev()}
             aria-label="Previous slide"
           >
-            <ArrowLeft className="h-6 w-6" />
+            <ChevronLeft className="h-6 w-6" />
           </Button>
-          
-          <Carousel setApi={setApi} className="w-full px-12" opts={{ loop: true }}>
-            <CarouselContent>
+
+          <div className="embla overflow-hidden" ref={emblaRef}>
+            <div className="embla__container flex">
               {projects.map((project, index) => (
-                <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
-                  <div className="h-full px-2 py-2">
-                    <Card className="h-full flex flex-col border border-cybersec-light/20 bg-cybersec-dark/60 backdrop-blur-sm hover:shadow-lg hover:shadow-primary/20 transition-all duration-300 transform hover:-translate-y-1">
-                      {/* Fixed height image container with overlay on hover */}
-                      <div className="h-48 overflow-hidden relative group">
-                        <img 
-                          src={project.image} 
-                          alt={project.title} 
-                          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-cybersec-dark/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
-                          <span className="text-white text-sm font-medium">View details</span>
-                        </div>
+                <div key={index} className="embla__slide flex-[0_0_100%] min-w-0 md:flex-[0_0_50%] lg:flex-[0_0_33.33%] px-2 md:px-4">
+                  <Card className="h-full flex flex-col overflow-hidden border border-cybersec-light/20 bg-cybersec-dark/60 backdrop-blur-sm card-hover">
+                    <div 
+                      className="h-48 overflow-hidden cursor-pointer" 
+                      onClick={() => navigate(`/project/${index}`)}
+                    >
+                      <img 
+                        src={project.image} 
+                        alt={project.title} 
+                        className="w-full h-full object-cover transition-transform duration-700 hover:scale-110"
+                      />
+                    </div>
+                    
+                    <CardHeader>
+                      <CardTitle 
+                        className="text-xl cursor-pointer hover:text-primary transition-colors"
+                        onClick={() => navigate(`/project/${index}`)}
+                      >
+                        {project.title}
+                      </CardTitle>
+                      <div className="flex flex-wrap gap-2 mt-2">
+                        {project.tags.map((tag, idx) => (
+                          <Badge key={idx} variant="outline" className="bg-primary/10 text-primary border-primary/20">
+                            {tag}
+                          </Badge>
+                        ))}
                       </div>
-                      <CardHeader className="flex-none">
-                        <CardTitle className="text-xl">{project.title}</CardTitle>
-                        <div className="flex flex-wrap gap-2 mt-2">
-                          {project.tags.map((tag, idx) => (
-                            <Badge key={idx} variant="outline" className="bg-primary/10 text-primary border-primary/20">
-                              {tag}
-                            </Badge>
-                          ))}
-                        </div>
-                      </CardHeader>
-                      <CardContent className="flex-grow">
-                        <CardDescription className="text-gray-300 text-base">{project.description}</CardDescription>
-                      </CardContent>
-                      <CardFooter className="flex justify-between mt-auto border-t border-cybersec-light/10 pt-4">
-                        <Button 
-                          variant="ghost" 
-                          className="text-primary hover:text-white hover:bg-primary"
-                          onClick={() => {
-                            if (project.link) {
-                              window.open(project.link, '_blank');
-                            }
-                          }}
-                        >
-                          View Details
-                        </Button>
-                        
-                        {project.link ? (
-                          <Button 
-                            variant="outline" 
-                            size="sm"
-                            className="hover:bg-primary hover:text-white transition-colors"
-                            onClick={() => window.open(project.link, '_blank')}
-                          >
-                            Visit Project
-                          </Button>
-                        ) : (
-                          <Button variant="outline" size="sm" disabled>
-                            Coming Soon
-                          </Button>
-                        )}
-                      </CardFooter>
-                    </Card>
-                  </div>
-                </CarouselItem>
+                    </CardHeader>
+                    
+                    <CardContent className="flex-1">
+                      <CardDescription className="text-gray-300 text-base">{project.description}</CardDescription>
+                    </CardContent>
+                    
+                    <CardFooter className="mt-auto flex justify-between border-t border-cybersec-light/10 pt-4">
+                      <Button 
+                        variant="ghost" 
+                        className="text-primary hover:text-white hover:bg-primary"
+                        onClick={() => {
+                          if (project.link) {
+                            window.open(project.link, '_blank');
+                          } else {
+                            navigate(`/project/${index}`);
+                          }
+                        }}
+                      >
+                        Voir le projet
+                      </Button>
+                      
+                      <Button 
+                        variant="outline" 
+                        size="sm"
+                        onClick={() => navigate(`/project/${index}`)}
+                      >
+                        En savoir plus
+                      </Button>
+                    </CardFooter>
+                  </Card>
+                </div>
               ))}
-            </CarouselContent>
-          </Carousel>
-          
-          {/* Right navigation button with improved styling */}
+            </div>
+          </div>
+
           <Button 
             variant="outline" 
             size="icon" 
-            className="absolute -right-4 top-1/2 -translate-y-1/2 z-10 rounded-full bg-cybersec-dark/80 border-cybersec-light/30 hover:bg-primary/80 shadow-lg hover:shadow-primary/30 transition-all"
-            onClick={() => api?.scrollNext()}
+            className="absolute right-0 top-1/2 -translate-y-1/2 z-10 rounded-full bg-cybersec-dark/80 border-cybersec-light/30 hover:bg-primary/80 shadow-lg hover:shadow-primary/30 transition-all"
+            onClick={() => emblaApi?.scrollNext()}
             aria-label="Next slide"
           >
-            <ArrowRight className="h-6 w-6" />
+            <ChevronRight className="h-6 w-6" />
           </Button>
           
-          {/* Improved navigation dots and controls at the bottom */}
-          <div className="flex flex-col items-center gap-4 mt-8">
-            {/* Progress indicators with active state */}
-            <div className="flex items-center justify-center gap-2">
-              {projects.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => api?.scrollTo(index)}
-                  className={`h-2.5 rounded-full transition-all duration-300 ${
-                    currentIndex === index 
-                      ? "bg-primary w-6" 
-                      : "bg-gray-500/50 w-2.5 hover:bg-gray-400/70"
-                  }`}
-                  aria-label={`Go to slide ${index + 1}`}
-                />
-              ))}
+          <div className="flex items-center justify-center mt-8">
+            <div className="flex items-center gap-4">
+              <div className="flex items-center gap-2">
+                {projects.map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => scrollTo(index)}
+                    className={`w-2.5 h-2.5 rounded-full transition-all ${
+                      currentSlide === index 
+                      ? "bg-primary w-4" 
+                      : "bg-gray-500/50 hover:bg-gray-400/60"
+                    }`}
+                    aria-label={`Aller au projet ${index + 1}`}
+                  />
+                ))}
+              </div>
+              
+              <Button
+                variant="outline"
+                size="icon"
+                className="h-9 w-9 rounded-full bg-cybersec-dark/80 border-cybersec-light/30 hover:bg-primary/80"
+                onClick={() => setAutoplay(!autoplay)}
+                title={autoplay ? "Mettre en pause" : "Lecture automatique"}
+              >
+                {autoplay ? <Pause className="h-4 w-4" /> : <Play className="h-4 w-4" />}
+              </Button>
             </div>
-            
-            {/* Play/pause button */}
-            <Button
-              variant="outline"
-              size="sm"
-              className="mt-2 bg-cybersec-dark/60 border-cybersec-light/20 hover:bg-primary/80 transition-colors"
-              onClick={() => setAutoPlay(!autoPlay)}
-            >
-              {autoPlay ? (
-                <>
-                  <Pause className="h-4 w-4 mr-2" />
-                  Pause Slideshow
-                </>
-              ) : (
-                <>
-                  <Play className="h-4 w-4 mr-2" />
-                  Play Slideshow
-                </>
-              )}
-            </Button>
           </div>
-        </div>
-
-        <div className="text-center mt-12">
-          <Button 
-            variant="outline" 
-            size="lg"
-            className="hover:bg-primary hover:text-white transition-colors"
-            onClick={() => {
-              const section = document.getElementById('entrepreneurship');
-              if (section) {
-                section.scrollIntoView({ behavior: 'smooth' });
-              }
-            }}
-          >
-            View All Projects
-          </Button>
         </div>
       </div>
     </section>

@@ -11,14 +11,14 @@ export const Footer = () => {
           <div className="flex flex-wrap gap-4 md:gap-8 justify-center">
             <a href="#home" className="hover:text-primary transition-colors">Home</a>
             <a href="#about" className="hover:text-primary transition-colors">About</a>
-            <a href="#entrepreneurship" className="hover:text-primary transition-colors">Projects</a>
+            <a href="#Projets" className="hover:text-primary transition-colors">Projects</a>
             <a href="#contact" className="hover:text-primary transition-colors">Contact</a>
           </div>
         </div>
         
         <div className="flex flex-col md:flex-row justify-between items-center">
           <div className="mb-4 md:mb-0 text-sm text-gray-400">
-            © {currentYear} Rudra. All rights reserved.
+            © {currentYear} Rudra. copyright? ca se mange ?
           </div>
           <div className="flex space-x-4">
             <a 
@@ -31,7 +31,7 @@ export const Footer = () => {
               <Linkedin className="h-5 w-5" />
             </a>
             <a 
-              href="https://gitlab.com/rudra" 
+              href="https://gitlab.com/rrudra" 
               target="_blank" 
               rel="noopener noreferrer"
               className="text-gray-400 hover:text-primary transition-colors"

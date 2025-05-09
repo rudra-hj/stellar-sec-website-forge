@@ -13,19 +13,19 @@ const lumina: EntrepreneurialProject = {
     impact: "L'application est actuellement en phase de test avec un groupe restreint de photographes professionnels qui rapportent un gain de temps significatif dans leur workflow.",
     keyDates: [
       {
-        date: "10/2023",
+        date: "Avril-2023",
         title: "Conception initiale",
         description: "Première ébauche du concept et études des besoins des utilisateurs"
       },
       {
-        date: "01/2024",
-        title: "Développement du prototype",
+        date: "Mai-2023",
+        title: "Développement des premier lignes de codes",
         description: "Création de la première version fonctionnelle de l'application"
       },
       {
-        date: "04/2024",
+        date: "Janvier-2025",
         title: "Test bêta",
-        description: "Lancement de la phase de test avec un groupe de photographes sélectionnés"
+        description: "Lancement de la phase de test avec un groupe de user sélectionnés"
       }
     ]
   }
