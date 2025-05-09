@@ -36,21 +36,59 @@ npm i
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+## Adding a New Project to the Carousel
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+To add a new project to the carousel, follow these steps:
 
-**Use GitHub Codespaces**
+1. Create a new file in `src/data/projects/` (e.g., `my-project.ts`)
+2. Use this template for your project:
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+```typescript
+import { EntrepreneurialProject } from "@/types/project";
 
-## What technologies are used for this project?
+const myProject: EntrepreneurialProject = {
+  title: "Project Title",
+  description: "Short project description that appears on the card",
+  image: "/images/projets/my-project.png", // Place image in public/images/projets/
+  tags: ["Tag1", "Tag2"],
+  link: "https://project-url.com", // Optional
+  content: {
+    about: "Detailed description of the project",
+    challenges: "Challenges faced during development", // Optional
+    impact: "Project impact and results", // Optional
+    keyDates: [ // Optional
+      {
+        date: "MM/YYYY",
+        title: "Milestone Title",
+        description: "Milestone description"
+      }
+    ]
+  }
+};
+
+export default myProject;
+```
+
+3. Add your project image to `public/images/projets/`
+4. Import and add your project in `src/data/projects/index.ts`:
+
+```typescript
+import myProject from "./my-project";
+
+export const projects = [
+  // ... existing projects
+  myProject
+];
+```
+
+## Customizing the Logo
+
+To change the site logo:
+
+1. Place your SVG logo in the `public` directory as `logo.svg`
+2. The logo will automatically be used in the navbar
+
+## Technologies Used
 
 This project is built with:
 

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Menu, X, Shield, Linkedin } from "lucide-react";
+import { Menu, X, Linkedin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
@@ -43,7 +43,7 @@ export const Navbar = () => {
         <div className="flex items-center">
           <Link to="/">
             <div className="flex items-center">
-              <Shield className="h-8 w-8 text-primary mr-2" />
+              <img src="/logo.svg" alt="Logo" className="h-8 w-8 mr-2" />
               <span className="font-bold text-xl">Rudra</span>
             </div>
           </Link>
